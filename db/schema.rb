@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510002511) do
+ActiveRecord::Schema.define(version: 20140511214914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authorizations", force: true do |t|
+  end
+
+  create_table "foursquare_reviews", force: true do |t|
+    t.string "username"
+    t.string "user_pic"
+    t.text   "comment"
   end
 
   create_table "users", force: true do |t|
