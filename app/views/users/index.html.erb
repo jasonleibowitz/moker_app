@@ -1,2 +1,6 @@
-<h1>Igor</h1>
-<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+<h1>Moker Baby!</h1>
+<% if current_user %>
+  <p>You are currently logged in as <%= current_user.email %>. <%= link_to "Log Out", destroy_user_session_path, method: :delete %></p>
+<% else %>
+  <a href="<%= user_omniauth_authorize_path(:facebook) %>"> <%= image_tag("fbooksign-in.png") %></a>
+<% end %>
