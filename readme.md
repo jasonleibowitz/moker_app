@@ -43,4 +43,4 @@ The possibilities are limitless.
 
 ### ERD
 
-![ERD](/images/erdv1.png)
+![ERD](/images/erdv2.png)

@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
 
 div.avatar-wrap {
@@ -19,4 +21,8 @@ div.avatar-wrap {
   width: 200px;
   height: 200px;
   overflow: hidden;
+}
+
+div.small-space {
+  margin-bottom: 20px;
 }
