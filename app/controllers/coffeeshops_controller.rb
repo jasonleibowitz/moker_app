@@ -8,4 +8,8 @@ class CoffeeshopsController < ApplicationController
     @coffee_shop = CoffeeShop.find(params[:id])
   end
 
+  def test
+
+  end
+
 end
