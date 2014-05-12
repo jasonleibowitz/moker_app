@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512134230) do
+ActiveRecord::Schema.define(version: 20140512161100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,22 +29,21 @@ ActiveRecord::Schema.define(version: 20140512134230) do
     t.string   "phone_number"
     t.string   "hours"
     t.float    "rating"
-    t.integer  "wifi_rating"
-    t.integer  "outlet_rating"
-    t.integer  "workspace_rating"
+    t.float    "wifi_rating"
+    t.float    "outlet_rating"
+    t.float    "workspace_rating"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "foursquare_reviews_id"
     t.float    "lat"
     t.float    "lon"
+    t.float    "coffee_rating"
   end
 
-  add_index "coffee_shops", ["foursquare_reviews_id"], name: "index_coffee_shops_on_foursquare_reviews_id", using: :btree
-
   create_table "foursquare_reviews", force: true do |t|
-    t.string "username"
-    t.string "user_pic"
-    t.text   "comment"
+    t.string  "username"
+    t.string  "user_pic"
+    t.text    "comment"
+    t.integer "coffee_shop_id"
   end
 
   create_table "reviews", force: true do |t|
