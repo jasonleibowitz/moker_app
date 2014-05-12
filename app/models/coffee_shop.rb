@@ -22,8 +22,8 @@ class CoffeeShop < ActiveRecord::Base
         shop.address = coffee_shop["venue"]["location"]["address"]
         shop.city = coffee_shop["venue"]["location"]["city"]
         shop.postal_code = coffee_shop["venue"]["location"]["postalCode"]
-        shop.lat = response["response"]["groups"][0]["items"][0]["venue"]["location"]["lat"]
-        shop.lon = response["response"]["groups"][0]["items"][0]["venue"]["location"]["lng"]
+        shop.lat = coffee_shop["venue"]["location"]["lat"]
+        shop.lon = coffee_shop["venue"]["location"]["lng"]
         shop.save!
       end
     end
