@@ -1,4 +1,4 @@
-class FoursquareReview < ApplicationController
+class FoursquareReviewsController < ApplicationController
 
   def index
     @foursquare_reviews = FoursquareReview.all

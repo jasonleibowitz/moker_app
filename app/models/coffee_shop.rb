@@ -1,4 +1,6 @@
 class CoffeeShop < ActiveRecord::Base
+  has_many :foursquarereviews
+  has_many :reviews
 
   FOURSQURE_EXPLORE_PREFIX = 'https://api.foursquare.com/v2/venues/explore?client_id=QAOJQNY2JJHJC2DNYHLDH0EEBPFDZAXEOA44DY1X1BZJOJOD&client_secret=4IBKRTTJCKADRNBP3GMLCOYJUF3N21G2HX1VEIE0C4E5D5PX&v=20140315&ll='
   FOURSQURE_EXPLORE_SUFFIX = '&query=coffee&venuePhotos=1'
@@ -12,7 +14,7 @@ class CoffeeShop < ActiveRecord::Base
       if (coffee_shop["venue"]["rating"] != nil) && (coffee_shop["venue"]["rating"] > 7.3)
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
-          shop.rating = coffee_shop["venue"]["rating"]
+          shop.rating = coffee_shop["venue"]["rating"].to_f
           shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}+original+#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
         end
         shop.name = coffee_shop["venue"]["name"]

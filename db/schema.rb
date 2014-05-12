@@ -1,4 +1,4 @@
-ew# encoding: UTF-8
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,8 +11,7 @@ ew# encoding: UTF-8
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140600181329) do
+ActiveRecord::Schema.define(version: 20140512001530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,28 +28,31 @@ ActiveRecord::Schema.define(version: 20140600181329) do
     t.string   "url"
     t.string   "phone_number"
     t.string   "hours"
-    t.integer  "rating"
+    t.float    "rating"
     t.integer  "wifi_rating"
     t.integer  "outlet_rating"
     t.integer  "workspace_rating"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "foursquare_reviews_id"
   end
 
-  create_table "identities", force: true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+  add_index "coffee_shops", ["foursquare_reviews_id"], name: "index_coffee_shops_on_foursquare_reviews_id", using: :btree
 
   create_table "foursquare_reviews", force: true do |t|
     t.string "username"
     t.string "user_pic"
     t.text   "comment"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.integer "user_id"
+    t.integer "coffee_shop_id"
+    t.boolean "wifi_rating"
+    t.boolean "outlet_rating"
+    t.boolean "workspace_rating"
+    t.boolean "coffee_rating"
+    t.string  "comment"
   end
 
   create_table "users", force: true do |t|
