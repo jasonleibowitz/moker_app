@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="big-space"></div>
+</div>
+
+<div class="row">
+  <div class="small-8 small-centered columns detail-wrap">
+    <div class="small-8 columns">
+      <h1 class="title"><%= @coffee_shop.name %><div id="burst-12"></div></h1>
+    </div>
+    <div class="row">
+      <div class="small-4 columns">
+        <div class="circle">
+          <p class="circle-rating"><%= @coffee_shop.rating %></p>
+        </div>
+      </div>
+    </div>
+    <div class="small-4 columns ratings">
+      <p>Coffee Quality: <%= @coffee_shop.coffee_rating %></p>
+      <p>Wifi Rating: <%= @coffee_shop.wifi_rating %></p>
+      <p>Workspace Rating: <%= @coffee_shop.workspace_rating %></p>
+      <p>Outlet Rating: <%= @coffee_shop.outlet_rating %></p>
+    </div>
+    <div class="row">
+      <div class="small-4 small-offset-3 columns rate-button">
+        <%= link_to 'Rate', root_path, class: 'button' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-8 small-centered columns tips">
+        <h6>Tips:</h6>
+        <hr>
+        <% @coffee_shop.foursquare_reviews.each do |freview| %>
+          <p class="tip-comment"><%= freview.comment %></p>
+          <p class="tip-username"><%= freview.username %></p>
+          <p></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="big-space"></div>
+    </div>
+  </div>
+</div>
+
