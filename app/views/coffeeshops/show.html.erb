@@ -19,14 +19,14 @@
         </div>
       </div>
     </div>
-    <div class="small-4 columns ratings">
-      <p>Coffee Quality: <%= @coffee_shop.coffee_rating %></p>
-      <p>Wifi Rating: <%= @coffee_shop.wifi_rating %></p>
-      <p>Workspace Rating: <%= @coffee_shop.workspace_rating %></p>
-      <p>Outlet Rating: <%= @coffee_shop.outlet_rating %></p>
+    <div class="small-6 columns ratings">
+      <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= @coffee_shop.coffee_rating %></span> &nbsp;
+         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= @coffee_shop.wifi_rating %></span> &nbsp;
+         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= @coffee_shop.workspace_rating %></span> &nbsp;
+         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= @coffee_shop.outlet_rating %></span></p>
     </div>
     <div class="row">
-      <div class="small-4 small-offset-3 columns rate-button">
+      <div class="small-4 small-offset-1 columns rate-button">
         <%= link_to 'Rate', root_path, class: 'button' %>
       </div>
     </div>

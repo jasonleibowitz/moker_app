@@ -41,7 +41,7 @@ div.detail-wrap {
 }
 
 h1.title {
-  text-align: center;
+  /*text-align: center;*/
   padding-top: 20px;
 }
 
@@ -50,8 +50,7 @@ div.ratings {
   padding-left: 25px;
 }
 div.ratings p {
-  font-size: 10pt;
-  line-height: 5px;
+  font-size: 12pt;
 }
 
 div.rate-button {
@@ -93,6 +92,7 @@ p.tip-username {
   line-height: 4px;
   margin-top: -18px;
 }
+
 
 /*#map {
   position:absolute;
