@@ -36,18 +36,34 @@
           <h6 class="tip-title">Tips:</h6>
         </div>
         <div class="small-4 small-offset-2 columns tip-button">
-          <%= link_to "Leave a Tip", root_path, class: "button tiny radius"  %>
+          <a href="#" data-reveal-id='new-tip' data-reveal-ajax="<%= new_coffee_shop_tip_path(@coffee_shop) %>" class="button tiny radius">Leave a Tip</a>
+          <div id="new-tip" class="reveal-modal medium" data-reveal>
+            <h3>Leave a Tip!</h3>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
         </div>
         <hr>
+        <% @coffee_shop.tips.order(created_at: :desc).each do |tip| %>
+        <p class="tip-comment"><%= tip.comment %></p>
+        <div class="small-2 columns">
+          <div class="review-avatar-wrap"><img class="review-avatar" src="<%= tip.user.image %>"></div>
+        </div>
+        <div class="small-7 columns">
+          <p class="tip-username"><%= tip.user.name %> | <%= tip.created_at.strftime "%B %e, %Y" %></p>
+        </div>
+        <hr>
+        <% end %>
+
+
         <% @coffee_shop.foursquare_reviews.each do |foursquare_review| %>
-          <p class="tip-comment"><%= foursquare_review.comment %></p>
-            <div class="small-2 columns">
-              <div class="review-avatar-wrap"><img class="review-avatar" src="<%= foursquare_review.user_pic %>"></div>
-            </div>
-            <div class="small-7 columns">
-              <p class="tip-username"><%= foursquare_review.username %> | <%= foursquare_review.created_at.strftime "%B %e, %Y" %></p>
-            </div>
-          <hr>
+        <p class="tip-comment"><%= foursquare_review.comment %></p>
+        <div class="small-2 columns">
+          <div class="review-avatar-wrap"><img class="review-avatar" src="<%= foursquare_review.user_pic %>"></div>
+        </div>
+        <div class="small-7 columns">
+          <p class="tip-username"><%= foursquare_review.username %> | <%= foursquare_review.created_at.strftime "%B %e, %Y" %></p>
+        </div>
+        <hr>
         <% end %>
       </div>
     </div>

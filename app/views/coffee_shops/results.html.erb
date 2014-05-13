@@ -13,7 +13,7 @@
     <div class="row">
       <% @sorted_coffee_shops.each do |shop| %>
       <div class="small-9 columns">
-        <a href="<%= coffeeshop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
+        <a href="<%= coffee_shop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
         <p><%= shop[0].address %></p>
         <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= shop[0].coffee_rating %></span> &nbsp;
          <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= shop[0].wifi_rating %></span> &nbsp;

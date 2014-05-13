@@ -2,6 +2,7 @@ class CoffeeShop < ActiveRecord::Base
 
   has_many :foursquare_reviews
   has_many :reviews
+  has_many :tips
 
   FOURSQURE_EXPLORE_PREFIX = 'https://api.foursquare.com/v2/venues/explore?client_id=QAOJQNY2JJHJC2DNYHLDH0EEBPFDZAXEOA44DY1X1BZJOJOD&client_secret=4IBKRTTJCKADRNBP3GMLCOYJUF3N21G2HX1VEIE0C4E5D5PX&v=20140315&ll='
   FOURSQURE_EXPLORE_SUFFIX = '&query=coffee&venuePhotos=1'
