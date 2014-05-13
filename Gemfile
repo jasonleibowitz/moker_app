@@ -38,6 +38,11 @@ gem 'area'
 
 gem 'foundation-rails'
 
+gem 'rack-mini-profiler'
+gem 'better_errors'
+gem 'bullet'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

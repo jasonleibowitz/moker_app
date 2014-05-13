@@ -31,7 +31,13 @@ GEM
       fastercsv (~> 1.5)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     builder (3.2.2)
+    bullet (4.9.0)
+      activesupport
+      uniform_notifier (~> 1.6.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -104,6 +110,8 @@ GEM
     pry-rails (0.3.2)
       pry (>= 0.9.10)
     rack (1.5.2)
+    rack-mini-profiler (0.1.31)
+      rack (>= 1.1.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.0)
@@ -157,6 +165,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.6.1)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -165,6 +174,8 @@ PLATFORMS
 
 DEPENDENCIES
   area
+  better_errors
+  bullet
   coffee-rails (~> 4.0.0)
   devise
   foundation-rails
@@ -174,6 +185,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   pry-rails
+  rack-mini-profiler
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
