@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : "Moker" %></title>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes' />
     <%= stylesheet_link_tag    "application" %>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -17,25 +17,38 @@
       <li class="name">
         <h1><a href="#">Moker</a></h1>
       </li>
-       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
 
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
-        <li class="active"><a href="#">Right Button Active</a></li>
+        <% if current_user %>
+        <li class="active">
+          <a href="#">
+            <div class="nav-avatar-wrap">
+              <img class="nav-avatar" src="<%= current_user.image %>">
+            </div>
+            <%= current_user.name %>
+          </a>
+        </li>
+        <% else %>
+          <li>
+            <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+          </li>
+        <% end %>
         <li class="has-dropdown">
-          <a href="#">Right Button Dropdown</a>
+          <a href="#">Menu</a>
           <ul class="dropdown">
-            <li><a href="#">First link in dropdown</a></li>
+            <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
       </ul>
 
       <!-- Left Nav Section -->
       <ul class="left">
-        <li><a href="#">Left Nav Button</a></li>
+        <li><a href="<%= root_path %>">Search</a></li>
       </ul>
     </section>
   </nav>
