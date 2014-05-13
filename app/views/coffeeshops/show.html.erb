@@ -27,17 +27,27 @@
     </div>
     <div class="row">
       <div class="small-4 small-offset-1 columns rate-button">
-        <%= link_to 'Rate', root_path, class: 'button' %>
+        <%= link_to 'Rate', root_path, class: 'button ' %>
       </div>
     </div>
     <div class="row">
       <div class="small-8 small-centered columns tips">
-        <h6>Tips:</h6>
+        <div class="small-6 columns">
+          <h6 class="tip-title">Tips:</h6>
+        </div>
+        <div class="small-4 small-offset-2 columns tip-button">
+          <%= link_to "Leave a Tip", root_path, class: "button tiny radius"  %>
+        </div>
         <hr>
         <% @coffee_shop.foursquare_reviews.each do |foursquare_review| %>
           <p class="tip-comment"><%= foursquare_review.comment %></p>
-          <p class="tip-username"><%= foursquare_review.username %></p>
-          <p></p>
+            <div class="small-2 columns">
+              <div class="review-avatar-wrap"><img class="review-avatar" src="<%= foursquare_review.user_pic %>"></div>
+            </div>
+            <div class="small-7 columns">
+              <p class="tip-username"><%= foursquare_review.username %> | <%= foursquare_review.created_at.strftime "%B %e, %Y" %></p>
+            </div>
+          <hr>
         <% end %>
       </div>
     </div>
