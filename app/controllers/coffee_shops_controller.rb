@@ -1,7 +1,7 @@
-class CoffeeshopsController < ApplicationController
+class CoffeeShopsController < ApplicationController
 
   def index
-    # @coffee_shops = CoffeeShop.all
+    @coffee_shops = CoffeeShop.all
   end
 
   def show

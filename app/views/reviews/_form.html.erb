@@ -1,0 +1,63 @@
+<%= form_for([@coffee_shop, @review]) do |f| %>
+<div class="row">
+  <div class="big-space"></div>
+</div>
+
+<div class="row">
+
+  <div class="small-4 small-centered columns detail-wrap">
+    <h3>Quick Survey</h3>
+    <hr>
+    <%= f.label :outlet_rating, 'Were there enough outlets?' %>
+    <%= f.radio_button :outlet_rating, 'Yes' %>
+    <%= f.label :outlet_rating, 'Yes' %>
+    <%= f.radio_button :outlet_rating, 'No' %>
+    <%= f.label :outlet_rating, 'No' %>
+    <hr>
+    <div class="row">
+      <div class="small-6 small-centered columns">
+        <%= f.label :wifi_rating, 'Was the wifi fast?' %>
+        <%= f.radio_button :wifi_rating, 'Yes' %>
+        <%= f.label :wifi_rating, 'Yes' %>
+        <%= f.radio_button :wifi_rating, 'Yes' %>
+        <%= f.label :wifi_rating, 'No' %>
+      </div>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="small-10 small-centered columns">
+       <%= f.label :workspace_rating, "Were you able to get work done at #{@coffee_shop.name}?" %>
+       <%= f.radio_button :workspace_rating, 'Yes' %>
+       <%= f.label :workspace_rating, 'Yes' %>
+       <%= f.radio_button :workspace_rating, 'Yes' %>
+       <%= f.label :workspace_rating, 'No' %>
+     </div>
+     <hr>
+     <div class="row">
+      <div class="small-12 small-centered columns">
+        <%= f.label :coffee_rating, 'Were there enough outlets?' %>
+        <%= f.radio_button :coffee_rating, 'Yes' %>
+        <%= f.label :coffee_rating, 'Yes' %>
+        <%= f.radio_button :coffee_rating, 'Yes' %>
+        <%= f.label :coffee_rating, 'No' %>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="small-12 small-centered columns">
+          <%= f.submit 'submit' %>
+          <% end %>
+          <div class="medium-space"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
