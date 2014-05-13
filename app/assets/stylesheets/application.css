@@ -26,3 +26,7 @@ div.avatar-wrap {
 div.small-space {
   margin-bottom: 20px;
 }
+
+div#form-tag {
+  width: 200px;
+}
