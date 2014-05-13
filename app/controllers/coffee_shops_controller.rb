@@ -16,8 +16,18 @@ class CoffeeShopsController < ApplicationController
       zip_code = params[:query]
       @sorted_coffee_shops = CoffeeShop.coffeeshop_user_distance(zip_code)
     else
-      name = params[:query].downcase
-      @sorted_coffee_shops = CoffeeShop.where(name: name.downcase)
+      @sorted_coffee_shops = []
+      filter = ["coffee", "cafe"]
+      query_names = params[:query].downcase.split()
+      filter.each do |filter_word|
+        query_names.delete_if {|x| x.include? filter_word }
+      end
+      query_names.each do |searched_word|
+        @matching_shops = CoffeeShop.where("name ILIKE ?", "%#{searched_word}%")
+        @matching_shops.each do |shop|
+          @sorted_coffee_shops.push([shop, shop.rating])
+        end
+      end
     end
   end
 
