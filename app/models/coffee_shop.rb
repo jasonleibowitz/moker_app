@@ -10,13 +10,18 @@ class CoffeeShop < ActiveRecord::Base
     zip = zipcode.to_s
     lat = zip.to_lat
     lon = zip.to_lon
-    response = HTTParty.get("#{FOURSQURE_EXPLORE_PREFIX}+#{lat}+,+#{lon}+#{FOURSQURE_EXPLORE_SUFFIX}")
+    response = HTTParty.get("#{FOURSQURE_EXPLORE_PREFIX}#{lat},#{lon}#{FOURSQURE_EXPLORE_SUFFIX}")
     response["response"]["groups"][0]["items"].each do |coffee_shop|
       if (coffee_shop["venue"]["rating"] != nil) && (coffee_shop["venue"]["rating"] > 7.3)
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
           shop.rating = coffee_shop["venue"]["rating"].to_f
           shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}original#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
+          shop.foursquare_id = coffee_shop["venue"]["id"]
+          shop.wifi_rating = 0
+          shop.outlet_rating = 0
+          shop.workspace_rating = 0
+          shop.coffee_rating = 0
         end
         shop.name = coffee_shop["venue"]["name"]
         shop.address = coffee_shop["venue"]["location"]["address"]
