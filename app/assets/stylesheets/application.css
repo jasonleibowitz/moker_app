@@ -120,6 +120,11 @@ img.review-avatar {
   height: 40px;
 }
 
+img.nav-avatar {
+  height: auto;
+  width: 55px;
+}
+
 div.review-avatar-wrap {
   border-radius: 100%;
   width: 35px;
@@ -127,6 +132,22 @@ div.review-avatar-wrap {
   overflow: hidden;
   margin-top: -13px;
   text-align: center;
+}
+
+div.nav-avatar-wrap {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 100%;
+  line-height: 25px;
+  vertical-align: middle;
+  /*padding-top: 2px;*/
+  /*text-align: center;*/
+}
+
+.fbook-signin {
+  width: 170px;
 }
 
 
