@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :authorizations
   has_many :reviews
+  has_many :tips
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -14,7 +15,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      # user.name = auth.info.name   # assuming the user model has a name
+      user.name = auth.info.name   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
     end
   end
