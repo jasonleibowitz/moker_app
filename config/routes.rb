@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   resources :coffee_shops, shallow: true do
     resource :foursquarereviews
     resource :reviews
+    resources :tips
     collection do
-      get '/search', to: 'coffeeshops#search'
-      get '/results', to: 'coffeeshops#results'
+      get '/search', to: 'coffee_shops#search'
+      get '/results', to: 'coffee_shops#results'
     end
   end
   resources :users
-  root to: 'users#index'
+  root to: 'coffee_shops#index'
 
 end

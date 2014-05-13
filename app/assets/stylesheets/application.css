@@ -16,6 +16,14 @@
 
  */
 
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
 body {
   background: RGB(215, 215, 215);
 }
@@ -89,18 +97,62 @@ div.tips {
   background: RGB(245, 245, 245);
   border-radius: 10px;
   overflow: scroll;
-  /*height: 100px;*/
+  height: 250px;
+}
+
+.tip-title {
+  margin-top: 15px;
 }
 
 p.tip-comment {
-
+  font-size: 10pt;
 }
 
 p.tip-username {
   color: grey;
   font-size: 8pt;
   line-height: 4px;
-  margin-top: -18px;
+  margin-left: -20px;
+  /*margin-top: -13px;*/
+  padding-bottom: 10px;
+}
+
+.tip-button {
+  margin-top: 15px;
+}
+
+img.review-avatar {
+  height: 40px;
+}
+
+img.nav-avatar {
+  height: auto;
+  width: 55px;
+}
+
+div.review-avatar-wrap {
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  margin-top: -13px;
+  text-align: center;
+}
+
+div.nav-avatar-wrap {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 100%;
+  line-height: 25px;
+  vertical-align: middle;
+  /*padding-top: 2px;*/
+  /*text-align: center;*/
+}
+
+.fbook-signin {
+  width: 170px;
 }
 
 

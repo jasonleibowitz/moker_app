@@ -42,8 +42,10 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
 end
-
 # gem 'quiet_assets'
+gem 'rack-mini-profiler'
+gem 'better_errors'
+gem 'bullet'
 
 
 # Use ActiveModel has_secure_password
