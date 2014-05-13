@@ -16,7 +16,7 @@ class CoffeeShop < ActiveRecord::Base
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
           shop.rating = coffee_shop["venue"]["rating"].to_f
-          shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}+original+#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
+          shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}original#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
         end
         shop.name = coffee_shop["venue"]["name"]
         shop.address = coffee_shop["venue"]["location"]["address"]

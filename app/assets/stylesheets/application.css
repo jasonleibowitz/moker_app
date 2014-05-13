@@ -129,3 +129,6 @@ p.tip-username {
         -ms-transform: rotate(60deg);
          -o-transform: rotate(60deg);
 }*/
+div#form-tag {
+  width: 200px;
+}
