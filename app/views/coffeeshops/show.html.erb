@@ -10,7 +10,7 @@
 <div class="row">
   <div class="small-8 small-centered columns detail-wrap">
     <div class="small-8 columns">
-      <h1 class="title"><%= @coffee_shop.name %><div id="burst-12"></div></h1>
+      <h1 class="title"><%= @coffee_shop.name %></h1>
     </div>
     <div class="row">
       <div class="small-4 columns">
@@ -34,9 +34,9 @@
       <div class="small-8 small-centered columns tips">
         <h6>Tips:</h6>
         <hr>
-        <% @coffee_shop.foursquare_reviews.each do |freview| %>
-          <p class="tip-comment"><%= freview.comment %></p>
-          <p class="tip-username"><%= freview.username %></p>
+        <% @coffee_shop.foursquare_reviews.each do |foursquare_review| %>
+          <p class="tip-comment"><%= foursquare_review.comment %></p>
+          <p class="tip-username"><%= foursquare_review.username %></p>
           <p></p>
         <% end %>
       </div>

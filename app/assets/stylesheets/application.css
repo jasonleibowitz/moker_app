@@ -22,9 +22,14 @@ body {
 
 div.avatar-wrap {
   border-radius: 100%;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
+  text-align: center;
+}
+
+img.result-image {
+  height: 150px;
 }
 
 div.small-space {

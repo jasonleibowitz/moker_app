@@ -1,8 +1,33 @@
-<% @sorted_coffee_shops.each do |shop| %>
-
 <div class="row">
-  <div class="small-2 large-4 columns"><%= shop[0].name %><img src="<%= shop[0].avatar %>"></div>
-  <div class="small-2 large-4 columns"><%= shop[0].rating %></div>
+  <div class="big-space"></div>
 </div>
 
-<% end %>
+<div class="row">
+  <div class="small-8 small-centered columns detail-wrap">
+    <div class="row">
+      <div class="small-6 columns">
+        <h2>Results:</h2>
+      </div>
+      <hr>
+    </div>
+    <div class="row">
+      <% @sorted_coffee_shops.each do |shop| %>
+      <div class="small-9 columns">
+        <a href="<%= coffeeshop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
+        <p><%= shop[0].address %></p>
+        <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= shop[0].coffee_rating %></span> &nbsp;
+         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= shop[0].wifi_rating %></span> &nbsp;
+         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= shop[0].workspace_rating %></span> &nbsp;
+         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= shop[0].outlet_rating %></span></p>
+       </div>
+       <div class="small-3 columns">
+        <div class="avatar-wrap">
+          <img class="result-image" src="<%= shop[0].avatar %>">
+        </div>
+      </div>
+      <hr>
+      <% end %>
+    </div>
+  </div>
+  <div class="row"><div class="big-space"></div></div>
+</div>
