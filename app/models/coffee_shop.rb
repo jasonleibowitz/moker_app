@@ -1,4 +1,5 @@
-class CoffeeShop < ActiveRecord::Base
+class CoffeeShop <
+ ActiveRecord::Base
   has_many :foursquarereviews
   has_many :reviews
 
