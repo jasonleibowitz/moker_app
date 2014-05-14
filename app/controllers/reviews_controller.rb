@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     @reviews = coffee_shop.reviews
@@ -11,7 +13,6 @@ class ReviewsController < ApplicationController
   end
 
   def new
-
     @coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     @review = Review.new
   end
@@ -21,7 +22,11 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.coffee_shop = @coffee_shop
     @review.user_id = current_user.id
-    @review.save!
+    if @review.valid?
+      @review.save!
+    else
+      flash[:error] = @review.errors.full_messages
+    end
     redirect_to @coffee_shop
   end
 
