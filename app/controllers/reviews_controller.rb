@@ -23,6 +23,10 @@ class ReviewsController < ApplicationController
     @review.coffee_shop = @coffee_shop
     @review.user_id = current_user.id
     if @review.valid?
+      @coffee_shop.update_wifi_rating(@review.wifi_rating)
+      @coffee_shop.update_outlet_rating(@review.outlet_rating)
+      @coffee_shop.update_workspace_rating(@review.workspace_rating)
+      @coffee_shop.update_coffee_rating(@review.coffee_rating)
       @review.save!
       redirect_to @coffee_shop
     else

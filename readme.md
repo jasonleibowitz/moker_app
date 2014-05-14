@@ -39,6 +39,11 @@ The possibilities are limitless.
 	* [Ruby on Rails](http://rubyonrails.org/)
 	* [jQuery](http://jquery.com/)
 	* [PostgreSQL](http://www.postgresql.org/)
+* Testing Platforms
+	* RSpec
+	* Shoulda Matchers
+	* Simple Cov
+		* Testing Coverage: 91.72%
 
 
 ### ERD

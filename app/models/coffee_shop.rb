@@ -17,12 +17,21 @@ class CoffeeShop < ActiveRecord::Base
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
           shop.rating = coffee_shop["venue"]["rating"].to_f
+          shop.coffee_rating = (coffee_shop["venue"]["rating"].to_f * 0.1)
+          shop.foursquare_rating = (coffee_shop["venue"]["rating"].to_f * 0.1)
           shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}original#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
           shop.foursquare_id = coffee_shop["venue"]["id"]
           shop.wifi_rating = 0
           shop.outlet_rating = 0
           shop.workspace_rating = 0
-          shop.coffee_rating = 0
+          shop.total_wifi_reviews = 0
+          shop.total_wifi_upvotes = 0
+          shop.total_outlet_reviews = 0
+          shop.total_outlet_upvotes = 0
+          shop.total_workspace_reviews = 0
+          shop.total_workspace_upvotes = 0
+          shop.total_coffee_quality_reviews = 0
+          shop.total_coffee_quality_upvotes = 0
         end
         shop.name = coffee_shop["venue"]["name"]
         shop.address = coffee_shop["venue"]["location"]["address"]
@@ -36,8 +45,9 @@ class CoffeeShop < ActiveRecord::Base
   end
 
   def self.coffeeshop_user_distance(user_zip)
-    lat1 = user_zip.to_lat.to_f
-    long1 = user_zip.to_lon.to_f
+    zip = user_zip.to_s
+    lat1 = zip.to_lat.to_f
+    long1 = zip.to_lon.to_f
     user_city = user_zip.to_s.to_region(:city => true)
     distance_hash = {}
     CoffeeShop.where(city: user_city).each do |shop|
@@ -66,6 +76,110 @@ class CoffeeShop < ActiveRecord::Base
     d = r * c
 
     return d
+  end
+
+  def update_wifi_rating(value)
+    if value == true
+      self.total_wifi_reviews += 1
+      self.total_wifi_upvotes += 1
+      self.wifi_rating = (total_wifi_upvotes / total_wifi_reviews)
+      self.recalculate_rating
+      self.save!
+    elsif value == false
+      self.total_wifi_reviews += 1
+      self.wifi_rating = (total_wifi_upvotes / total_wifi_reviews)
+      self.recalculate_rating
+      self.save!
+    end
+  end
+
+  def update_outlet_rating(value)
+    if value == true
+      self.total_outlet_reviews += 1
+      self.total_outlet_upvotes += 1
+      self.outlet_rating = (total_outlet_upvotes / total_outlet_reviews)
+      self.recalculate_rating
+      self.save!
+    elsif value == false
+      self.total_outlet_reviews += 1
+      self.outlet_rating = (total_outlet_upvotes / total_outlet_reviews)
+      self.recalculate_rating
+      self.save!
+    end
+  end
+
+  def update_workspace_rating(value)
+    if value == true
+      self.total_workspace_reviews += 1
+      self.total_workspace_upvotes += 1
+      self.workspace_rating = (total_workspace_upvotes / total_workspace_reviews)
+      self.recalculate_rating
+      self.save!
+    elsif value == false
+      self.total_workspace_reviews += 1
+      self.workspace_rating = (total_workspace_upvotes / total_workspace_reviews)
+      self.recalculate_rating
+      self.save!
+    end
+  end
+
+  def update_coffee_rating(value)
+    if value == true
+      self.total_coffee_quality_reviews += 1
+      self.total_coffee_quality_upvotes += 1
+      self.coffee_rating = (total_coffee_quality_upvotes / total_coffee_quality_reviews)
+      self.recalculate_rating
+      self.save!
+    elsif value == false
+      self.total_coffee_quality_reviews +=1
+      self.coffee_rating = (total_coffee_quality_upvotes / total_coffee_quality_reviews)
+      self.recalculate_rating
+      self.save!
+    end
+  end
+
+  def recalculate_rating
+    # Set up weights for each rating. If a rating is zero (defined above) remove the weight from impacting rating calculation below
+    foursquare_weight = 80
+    if workspace_rating > 0
+      workspace_weight = 8
+    else
+      workspace_weight = 0
+    end
+    if wifi_rating > 0
+      wifi_weight = 6
+    else
+      wifi_weight = 0
+    end
+    if coffee_rating > 0
+      coffee_weight = 4
+    else
+      coffee_weight = 0
+    end
+    if outlet_rating > 0
+      outlet_weight = 2
+    else
+      outlet_weight = 0
+    end
+
+    # create weighted rating by multiplying weight by rating
+    weighted_foursquare_rating = foursquare_weight * foursquare_rating
+    weighted_workspace_rating = workspace_weight * workspace_rating
+    weighted_wifi_rating = wifi_weight * wifi_rating
+    weighted_coffee_rating = coffee_weight * coffee_rating
+    weighted_outlet_rating = outlet_weight * outlet_rating
+
+
+
+    # Set total weighted rating by adding all weighted ratings together
+    weighted_rating_total = weighted_foursquare_rating + weighted_workspace_rating + weighted_wifi_rating + weighted_coffee_rating + weighted_outlet_rating
+
+    # The updated rating is the weighted rating total over the weights total
+    updated_rating = weighted_rating_total / (foursquare_weight + workspace_weight + wifi_weight + coffee_weight + outlet_weight)
+
+    # Update the rating and round to two decimal places
+    self.rating = '%.2f' % (updated_rating * 10)
+    self.save!
   end
 
 

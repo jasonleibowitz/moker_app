@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513211124) do
+ActiveRecord::Schema.define(version: 20140514160514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20140513211124) do
     t.float    "lon"
     t.float    "coffee_rating"
     t.string   "foursquare_id"
+    t.integer  "total_wifi_reviews"
+    t.integer  "total_wifi_upvotes"
+    t.integer  "total_outlet_reviews"
+    t.integer  "total_outlet_upvotes"
+    t.integer  "total_workspace_reviews"
+    t.integer  "total_workspace_upvotes"
+    t.integer  "total_coffee_quality_reviews"
+    t.integer  "total_coffee_quality_upvotes"
+    t.float    "foursquare_rating"
   end
 
   create_table "foursquare_reviews", force: true do |t|
