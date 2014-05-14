@@ -45,8 +45,9 @@ class CoffeeShop < ActiveRecord::Base
   end
 
   def self.coffeeshop_user_distance(user_zip)
-    lat1 = user_zip.to_lat.to_f
-    long1 = user_zip.to_lon.to_f
+    zip = user_zip.to_s
+    lat1 = zip.to_lat.to_f
+    long1 = zip.to_lon.to_f
     user_city = user_zip.to_s.to_region(:city => true)
     distance_hash = {}
     CoffeeShop.where(city: user_city).each do |shop|
