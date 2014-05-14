@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20140513211124) do
     t.boolean  "outlet_rating"
     t.boolean  "workspace_rating"
     t.boolean  "coffee_rating"
-    t.string   "tip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

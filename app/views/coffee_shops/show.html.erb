@@ -1,6 +1,6 @@
 <!-- <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' /> -->
 
-<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+<script href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
 
 <div class="row">
@@ -28,7 +28,6 @@
     <div class="row">
       <div class="small-4 small-offset-1 columns rate-button">
         <%= link_to 'Rate', new_coffee_shop_reviews_path(@coffee_shop), class: 'button' %>
-        <%= link_to 'Rate', root_path, class: 'button ' %>
       </div>
     </div>
     <div class="row">
@@ -71,7 +70,8 @@
     <div class="row">
       <div class="small-8 small-centered columns">
         <style> #map { position:relative; top:25px; bottom:0; width:100%; height:400px; } </style>
-        <div id="map"></div>
+        <div id="map" lon-coordinate='<%= @coffee_shop.lon %>' lat-coordinate="<%= @coffee_shop.lat %>" shop-name="<%= @coffee_shop.name %>" shop-address='<%= @coffee_shop.address %>'></div>
+
         <script>
           var map = L.mapbox.map('map', 'jasonleibowitz.i7i19hk9')
             .setView([<%= @coffee_shop.lat %>, <%= @coffee_shop.lon %>], 15);
@@ -97,6 +97,7 @@
               }
           }).addTo(map);
         </script>
+
       </div>
     </div>
     <div class="row">
@@ -104,4 +105,3 @@
     </div>
   </div>
 </div>
-
