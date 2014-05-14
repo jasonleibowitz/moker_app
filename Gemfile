@@ -46,7 +46,7 @@ end
 group :development do
   gem "binding_of_caller"
   gem 'pry-rails'
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'better_errors'
   gem 'bullet'
   gem 'quiet_assets'
