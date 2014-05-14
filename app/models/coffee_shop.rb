@@ -17,12 +17,12 @@ class CoffeeShop < ActiveRecord::Base
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
           shop.rating = coffee_shop["venue"]["rating"].to_f
+          shop.coffee_rating = coffee_shop["venue"]["rating"].to_f
           shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}original#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
           shop.foursquare_id = coffee_shop["venue"]["id"]
           shop.wifi_rating = 0
           shop.outlet_rating = 0
           shop.workspace_rating = 0
-          shop.coffee_rating = 0
         end
         shop.name = coffee_shop["venue"]["name"]
         shop.address = coffee_shop["venue"]["location"]["address"]
@@ -105,6 +105,10 @@ class CoffeeShop < ActiveRecord::Base
       self.workspace_rating = (total_workspace_upvotes / total_workspace_reviews)
       self.save!
     end
+  end
+
+  def recalculate_rating
+
   end
 
 
