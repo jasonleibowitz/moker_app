@@ -52,9 +52,14 @@ div.big-space {
   margin-bottom: 50px;
 }
 
-div.list-coffeeshops-wrap {
+div.survey-wrap {
   border-radius: 10px;
   background: white;
+  text-align: center;
+}
+
+div.survey-errors-wrap{
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -199,3 +204,5 @@ div.nav-avatar-wrap {
 div#form-tag {
   width: 200px;
 }
+
+

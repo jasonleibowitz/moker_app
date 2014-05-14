@@ -24,10 +24,10 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     if @review.valid?
       @review.save!
+      redirect_to @coffee_shop
     else
-      flash[:error] = @review.errors.full_messages
+      render 'new'
     end
-    redirect_to @coffee_shop
   end
 
   private

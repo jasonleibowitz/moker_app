@@ -1,11 +1,23 @@
 <%= form_for([@coffee_shop, @review]) do |f| %>
+<div class="small-6 small-centered columns survey-errors-wrap">
+  <% if @review.errors.any? %>
+  <h4>Please correct the following errors:</h4>
+  <hr>
+  <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
 <div class="row">
   <div class="big-space"></div>
 </div>
 
 <div class="row">
 
-  <div class="small-4 small-centered columns list-coffeeshops-wrap">
+  <div class="small-4 small-centered columns survey-wrap">
     <h3>Quick Survey</h3>
     <hr>
     <%= f.label :outlet_rating, 'Were there enough outlets?' %>
