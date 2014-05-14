@@ -5,21 +5,21 @@
 
 <div class="row">
 
-  <div class="small-4 small-centered columns detail-wrap">
+  <div class="small-4 small-centered columns list-coffeeshops-wrap">
     <h3>Quick Survey</h3>
     <hr>
     <%= f.label :outlet_rating, 'Were there enough outlets?' %>
-    <%= f.radio_button :outlet_rating, 'Yes' %>
+    <%= f.radio_button :outlet_rating, true %>
     <%= f.label :outlet_rating, 'Yes' %>
-    <%= f.radio_button :outlet_rating, 'No' %>
+    <%= f.radio_button :outlet_rating, false %>
     <%= f.label :outlet_rating, 'No' %>
     <hr>
     <div class="row">
       <div class="small-6 small-centered columns">
         <%= f.label :wifi_rating, 'Was the wifi fast?' %>
-        <%= f.radio_button :wifi_rating, 'Yes' %>
+        <%= f.radio_button :wifi_rating, true %>
         <%= f.label :wifi_rating, 'Yes' %>
-        <%= f.radio_button :wifi_rating, 'Yes' %>
+        <%= f.radio_button :wifi_rating, false %>
         <%= f.label :wifi_rating, 'No' %>
       </div>
       <hr>
@@ -27,18 +27,18 @@
     <div class="row">
       <div class="small-10 small-centered columns">
        <%= f.label :workspace_rating, "Were you able to get work done at #{@coffee_shop.name}?" %>
-       <%= f.radio_button :workspace_rating, 'Yes' %>
+       <%= f.radio_button :workspace_rating, true %>
        <%= f.label :workspace_rating, 'Yes' %>
-       <%= f.radio_button :workspace_rating, 'Yes' %>
+       <%= f.radio_button :workspace_rating, false %>
        <%= f.label :workspace_rating, 'No' %>
      </div>
      <hr>
      <div class="row">
       <div class="small-12 small-centered columns">
-        <%= f.label :coffee_rating, 'Were there enough outlets?' %>
-        <%= f.radio_button :coffee_rating, 'Yes' %>
+        <%= f.label :coffee_rating, "Did you enjoy the coffee at #{@coffee_shop.name}?" %>
+        <%= f.radio_button :coffee_rating, true %>
         <%= f.label :coffee_rating, 'Yes' %>
-        <%= f.radio_button :coffee_rating, 'Yes' %>
+        <%= f.radio_button :coffee_rating, false %>
         <%= f.label :coffee_rating, 'No' %>
       </div>
       <hr>
