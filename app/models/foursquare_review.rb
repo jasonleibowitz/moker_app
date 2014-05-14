@@ -47,21 +47,21 @@ class FoursquareReview < ActiveRecord::Base
           # If the word before 'wifi' contains a word from the good_word list upvote the coffee shop's wifi rating
           wifi_good_list.each do |good_word|
             if split_string[split_string.index("wifi") - 1] == good_word
-              shop.foursquare_update_wifi(true)
+              shop.update_wifi_rating(true)
             end
           # If the word two before 'wifi' contains a word from the good_word list upvote the coffee shop's wifi rating
             if split_string[split_string.index("wifi") - 2] == good_word
-              shop.foursquare_update_wifi(true)
+              shop.update_wifi_rating(true)
             end
           end
           # If the word before 'wifi' contains a word from the bad_word list downvote the coffee shop's wifi rating
           wifi_bad_list.each do |bad_word|
             if split_string[split_string.index("wifi") - 1] == bad_word
-              shop.foursquare_update_wifi(false)
+              shop.update_wifi_rating(false)
             end
           # If the word two before 'wifi' contains a word from the bad_word list downvote the coffee shop's wifi rating
             if split_string[split_string.index("wifi") - 2] == bad_word
-              shop.foursquare_update_wifi(false)
+              shop.update_wifi_rating(false)
             end
           end
         end
@@ -70,21 +70,21 @@ class FoursquareReview < ActiveRecord::Base
           outlet_good_list.each do |good_word|
             # If the word before 'outlet' contains a word from the good_word list upvote the coffee shop's outlet rating
             if split_string[split_string.index("outlets") - 1] == good_word
-              shop.foursquare_update_outlet(true)
+              shop.update_outlet_rating(true)
             end
             # If the word two before 'outlet' contains a word from the good_word list upvote the coffee shop's outlet rating
             if split_string[split_string.index("outlets") - 2] == good_word
-              shop.foursquare_update_outlet(true)
+              shop.update_outlet_rating(true)
             end
           end
           outlet_bad_list.each do |bad_word|
             # If the word before 'outlet' contains a word from the bad_word list downvote the coffee shop's outlet rating
             if split_string[split_string.index("outlets") - 1] == bad_word
-              shop.foursquare_update_outlet(false)
+              shop.update_outlet_rating(false)
             end
             # If the word two before 'outlet' contains a word from the bad_word list downvote the coffee shop's outlet rating
             if split_string[split_string.index("outlets") - 2] == bad_word
-              shop.foursquare_update_outlet(false)
+              shop.update_outlet_rating(false)
             end
           end
         end
@@ -93,33 +93,33 @@ class FoursquareReview < ActiveRecord::Base
           workspace_good_list.each do |good_word|
             # If the word before 'workspace' contains a word from the good_word list upvote the coffee shop's workspace rating
             if split_string[split_string.index("tables") - 1] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             # If the word two before 'workspace' contains a word from the good_word list upvote the coffee shop's workspace rating
             if split_string[split_string.index("tables") - 2] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             if split_string[split_string.index("tables") + 1] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             if split_string[split_string.index("tables") + 2] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
           end
           workspace_bad_list.each do |bad_word|
             # If the word before 'workspace' contains a word from the bad_word list downvote the coffee shop's workspace rating
             if split_string[split_string.index("tables") - 1] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             # If the word two before 'workspace' contains a word from the bad_word list downvote the coffee shop's workspace rating
             if split_string[split_string.index("tables") - 2] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             if split_string[split_string.index("tables") + 1] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             if split_string[split_string.index("tables") + 2] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
           end
         end
@@ -128,33 +128,33 @@ class FoursquareReview < ActiveRecord::Base
           workspace_good_list.each do |good_word|
             # If the word before 'workspace' contains a word from the good_word list upvote the coffee shop's workspace rating
             if split_string[split_string.index("space") - 1] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             # If the word two before 'workspace' contains a word from the good_word list upvote the coffee shop's workspace rating
             if split_string[split_string.index("space") - 2] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             if split_string[split_string.index("space") + 1] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
             if split_string[split_string.index("space") + 2] == good_word
-              shop.foursquare_update_workspace(true)
+              shop.update_workspace_rating(true)
             end
           end
           workspace_bad_list.each do |bad_word|
             # If the word before 'workspace' contains a word from the bad_word list downvote the coffee shop's workspace rating
             if split_string[split_string.index("space") - 1] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             # If the word two before 'workspace' contains a word from the bad_word list downvote the coffee shop's workspace rating
             if split_string[split_string.index("space") - 2] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             if split_string[split_string.index("space") + 1] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
             if split_string[split_string.index("space") + 2] == bad_word
-              shop.foursquare_update_workspace(false)
+              shop.update_workspace_rating(false)
             end
           end
         end

@@ -68,7 +68,7 @@ class CoffeeShop < ActiveRecord::Base
     return d
   end
 
-  def foursquare_update_wifi(value)
+  def update_wifi_rating(value)
     if value == true
       self.total_wifi_reviews += 1
       self.total_wifi_upvotes += 1
@@ -81,7 +81,7 @@ class CoffeeShop < ActiveRecord::Base
     end
   end
 
-  def foursquare_update_outlet(value)
+  def update_outlet_rating(value)
     if value == true
       self.total_outlet_reviews += 1
       self.total_outlet_upvotes += 1
@@ -94,7 +94,7 @@ class CoffeeShop < ActiveRecord::Base
     end
   end
 
-  def foursquare_update_workspace(value)
+  def update_workspace_rating(value)
     if value == true
       self.total_workspace_reviews += 1
       self.total_workspace_upvotes += 1
