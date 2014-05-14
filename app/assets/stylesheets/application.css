@@ -12,11 +12,189 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+body {
+  background: RGB(215, 215, 215);
+}
 
 div.avatar-wrap {
   border-radius: 100%;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
+  text-align: center;
+}
+
+img.result-image {
+  height: 150px;
+}
+
+div.small-space {
+  margin-bottom: 20px;
+}
+
+div.medium-space {
+  margin-bottom: 30px;
+}
+
+div.big-space {
+  margin-bottom: 50px;
+}
+
+div.list-coffeeshops-wrap {
+  border-radius: 10px;
+  background: white;
+}
+
+div.detail-wrap {
+  border-radius: 10px;
+  background: white;
+}
+
+h1.title {
+  /*text-align: center;*/
+  padding-top: 20px;
+}
+
+div.ratings {
+  padding-top: 10px;
+  padding-left: 25px;
+}
+div.ratings p {
+  font-size: 12pt;
+}
+
+div.rate-button {
+  text-align: right;
+  margin-top: 20px;
+}
+
+div.circle {
+  background: orange;
+  border-radius: 100%;
+  height: 75px;
+  width: 75px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+p.circle-rating {
+  line-height: 75px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+div.tips {
+  margin-top: 25px;
+  background: RGB(245, 245, 245);
+  border-radius: 10px;
+  overflow: scroll;
+  height: 250px;
+}
+
+.tip-title {
+  margin-top: 15px;
+}
+
+p.tip-comment {
+  font-size: 10pt;
+}
+
+p.tip-username {
+  color: grey;
+  font-size: 8pt;
+  line-height: 4px;
+  margin-left: -20px;
+  /*margin-top: -13px;*/
+  padding-bottom: 10px;
+}
+
+.tip-button {
+  margin-top: 15px;
+}
+
+img.review-avatar {
+  height: 40px;
+}
+
+img.nav-avatar {
+  height: auto;
+  width: 55px;
+}
+
+div.review-avatar-wrap {
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  margin-top: -13px;
+  text-align: center;
+}
+
+div.nav-avatar-wrap {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 100%;
+  line-height: 25px;
+  vertical-align: middle;
+  /*padding-top: 2px;*/
+  /*text-align: center;*/
+}
+
+.fbook-signin {
+  width: 170px;
+}
+
+
+/*#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
+}*/
+
+/*#burst-12 {
+    background: red;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    text-align: center;
+}
+#burst-12:before, #burst-12:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    background: red;
+}
+#burst-12:before {
+    -webkit-transform: rotate(30deg);
+       -moz-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+         -o-transform: rotate(30deg);
+}
+#burst-12:after {
+    -webkit-transform: rotate(60deg);
+       -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+         -o-transform: rotate(60deg);
+}*/
+div#form-tag {
+  width: 200px;
 }

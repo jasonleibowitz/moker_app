@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510002511) do
+ActiveRecord::Schema.define(version: 20140514004049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,14 +19,76 @@ ActiveRecord::Schema.define(version: 20140510002511) do
   create_table "authorizations", force: true do |t|
   end
 
+  create_table "coffee_shops", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "avatar"
+    t.string   "url"
+    t.string   "phone_number"
+    t.string   "hours"
+    t.float    "rating"
+    t.float    "wifi_rating"
+    t.float    "outlet_rating"
+    t.float    "workspace_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "lat"
+    t.float    "lon"
+    t.float    "coffee_rating"
+    t.string   "foursquare_id"
+    t.integer  "total_wifi_reviews"
+    t.integer  "total_wifi_upvotes"
+    t.integer  "total_outlet_reviews"
+    t.integer  "total_outlet_upvotes"
+    t.integer  "total_workspace_reviews"
+    t.integer  "total_workspace_upvotes"
+    t.integer  "total_coffee_quality_reviews"
+    t.integer  "total_coffee_quality_upvotes"
+  end
+
+  create_table "foursquare_reviews", force: true do |t|
+    t.string   "username"
+    t.string   "user_pic"
+    t.text     "comment"
+    t.integer  "coffee_shop_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "coffee_shop_id"
+    t.boolean  "wifi_rating"
+    t.boolean  "outlet_rating"
+    t.boolean  "workspace_rating"
+    t.boolean  "coffee_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tips", force: true do |t|
+    t.integer  "user_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "coffee_shop_id"
+  end
+
   create_table "users", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "secret"
+    t.string   "name"
+    t.string   "length"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string   "provider"
-    t.string   "uid"
     t.string   "image"
   end
 

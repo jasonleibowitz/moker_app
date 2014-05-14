@@ -32,6 +32,22 @@ gem 'devise'
 
 gem 'omniauth-facebook'
 
+gem 'httparty'
+
+gem 'area'
+
+gem 'foundation-rails'
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+# gem 'quiet_assets'
+gem 'rack-mini-profiler'
+gem 'better_errors'
+gem 'bullet'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
