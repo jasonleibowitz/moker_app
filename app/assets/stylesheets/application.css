@@ -52,6 +52,12 @@ div.big-space {
   margin-bottom: 50px;
 }
 
+div.list-coffeeshops-wrap {
+  border-radius: 10px;
+  background: white;
+  text-align: center;
+}
+
 div.detail-wrap {
   border-radius: 10px;
   background: white;
