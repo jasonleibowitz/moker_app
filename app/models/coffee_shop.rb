@@ -68,6 +68,45 @@ class CoffeeShop < ActiveRecord::Base
     return d
   end
 
+  def foursquare_update_wifi(value)
+    if value == true
+      self.total_wifi_reviews += 1
+      self.total_wifi_upvotes += 1
+      self.wifi_rating = (total_wifi_upvotes / total_wifi_reviews)
+      self.save!
+    elsif value == false
+      self.total_wifi_reviews += 1
+      self.wifi_rating = (total_wifi_upvotes / total_wifi_reviews)
+      self.save!
+    end
+  end
+
+  def foursquare_update_outlet(value)
+    if value == true
+      self.total_outlet_reviews += 1
+      self.total_outlet_upvotes += 1
+      self.outlet_rating = (total_outlet_upvotes / total_outlet_reviews)
+      self.save!
+    elsif value == false
+      self.total_outlet_reviews += 1
+      self.outlet_rating = (total_outlet_upvotes / total_outlet_reviews)
+      self.save!
+    end
+  end
+
+  def foursquare_update_workspace(value)
+    if value == true
+      self.total_workspace_reviews += 1
+      self.total_workspace_upvotes += 1
+      self.workspace_rating = (total_workspace_upvotes / total_workspace_reviews)
+      self.save!
+    elsif value == false
+      self.total_workspace_reviews += 1
+      self.workspace_rating = (total_workspace_upvotes / total_workspace_reviews)
+      self.save!
+    end
+  end
+
 
   private
   def power(num, pow)
