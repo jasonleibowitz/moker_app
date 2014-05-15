@@ -39,7 +39,7 @@ class CoffeeShop < ActiveRecord::Base
         shop.coffee_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
         shop.foursquare_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
         # Picture grabbed in second API call
-        begin:
+        begin
           shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}" || nil
         rescue NoMethodError
           shop.avatar = nil
