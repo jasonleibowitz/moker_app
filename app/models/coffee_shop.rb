@@ -65,7 +65,8 @@ class CoffeeShop < ActiveRecord::Base
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
     sorted_array = distance_hash.sort_by {|key, value| value}
-    new_sorted_array = sorted_array.map do |shop|
+    limited_sorted_array = sorted_array.first(15)
+    new_sorted_array = limited_sorted_array.map do |shop|
         shop
     end
     return new_sorted_array.sort {|a,b| b[0].rating <=> a[0].rating}.first 10
