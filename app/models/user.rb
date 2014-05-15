@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :reviews
   has_many :tips
+  belongs_to :coffee_shop
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -26,6 +27,18 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def check_in(coffee_shop)
+    self.coffee_shop_id = coffee_shop.to_i
+    self.check_in_time = Time.now
+    self.save!
+  end
+
+  def check_out
+    self.coffee_shop_id = nil
+    self.check_in_time = nil
+    self.save!
   end
 
 end
