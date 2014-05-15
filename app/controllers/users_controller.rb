@@ -30,6 +30,15 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def check_in
+    @coffee_shop = params[:id]
+    if user_signed_in?
+      @user = current_user
+      @user.check_in(@coffee_shop)
+      redirect_to root_path
+    end
+  end
+
   private
   def user_params
     return params.require(:user).permit(:email)

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get '/search', to: 'coffee_shops#search'
       get '/results', to: 'coffee_shops#results'
+      post ':id/checkin' => 'users#check_in', :as => 'check_in'
     end
   end
   resources :users
