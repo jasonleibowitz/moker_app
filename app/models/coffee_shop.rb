@@ -13,6 +13,7 @@ class CoffeeShop < ActiveRecord::Base
     lon = zip.to_lon
     response = HTTParty.get("#{FOURSQURE_EXPLORE_PREFIX}#{lat},#{lon}#{FOURSQURE_EXPLORE_SUFFIX}")
     response["response"]["groups"][0]["items"].each do |coffee_shop|
+
       if (coffee_shop["venue"]["rating"] != nil) && (coffee_shop["venue"]["rating"] > 7.3)
         shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
         if shop.name == nil
@@ -48,15 +49,19 @@ class CoffeeShop < ActiveRecord::Base
     zip = user_zip.to_s
     lat1 = zip.to_lat.to_f
     long1 = zip.to_lon.to_f
-    user_city = user_zip.to_s.to_region(:city => true)
+    user_city = zip.to_region(:city => true)
     distance_hash = {}
+
     CoffeeShop.where(city: user_city).each do |shop|
       lat2 = shop.postal_code.to_lat.to_f
       long2 = shop.postal_code.to_lon.to_f
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
-    sorted_hash = distance_hash.sort_by {|key, value| value}
-    return sorted_hash.first 10
+    sorted_array = distance_hash.sort_by {|key, value| value}
+    new_sorted_array = sorted_array.map do |shop|
+        shop[0]
+    end
+    return new_sorted_array.sort {|a,b| b.rating <=> a.rating}.first 10
   end
 
   def haversine(lat1, long1, lat2, long2)
