@@ -106,7 +106,6 @@ div.picture-gallery {
 }
 
 div.show-picture-wrap {
-  /*display: inline-block;*/
   height: 65px;
   width: 100px;
   overflow: hidden;
@@ -120,7 +119,6 @@ img.show-picture {
 }
 
 h1.title {
-  /*text-align: center;*/
   padding-top: 20px;
 }
 
@@ -157,8 +155,6 @@ div.check-ins {
   margin-top: 25px;
   background: RGB(245, 245, 245);
   border-radius: 10px;
-  /*overflow: scroll;*/
-  /*height: 100px;*/
   padding: 25px;
 }
 
@@ -189,7 +185,6 @@ p.tip-username {
   font-size: 8pt;
   line-height: 4px;
   margin-left: -20px;
-  /*margin-top: -13px;*/
   padding-bottom: 10px;
 }
 
@@ -223,8 +218,6 @@ div.nav-avatar-wrap {
   border-radius: 100%;
   line-height: 25px;
   vertical-align: middle;
-  /*padding-top: 2px;*/
-  /*text-align: center;*/
 }
 
 .fbook-signin {
@@ -241,42 +234,6 @@ div.review-wrap {
   text-align: center;
 }
 
-
-/*#map {
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:100%;
-}*/
-
-/*#burst-12 {
-    background: red;
-    width: 80px;
-    height: 80px;
-    position: relative;
-    text-align: center;
-}
-#burst-12:before, #burst-12:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 80px;
-    width: 80px;
-    background: red;
-}
-#burst-12:before {
-    -webkit-transform: rotate(30deg);
-       -moz-transform: rotate(30deg);
-        -ms-transform: rotate(30deg);
-         -o-transform: rotate(30deg);
-}
-#burst-12:after {
-    -webkit-transform: rotate(60deg);
-       -moz-transform: rotate(60deg);
-        -ms-transform: rotate(60deg);
-         -o-transform: rotate(60deg);
-}*/
 div#form-tag {
   width: 200px;
 }
