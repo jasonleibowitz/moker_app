@@ -29,7 +29,7 @@ class TipsController < ApplicationController
 
   private
   def tip_params
-    return params.require(:tip).permit(:comment)
+    return params.require(:tip).permit(:comment, :picture)
   end
 
 end

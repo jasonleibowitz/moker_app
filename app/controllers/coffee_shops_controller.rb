@@ -6,6 +6,13 @@ class CoffeeShopsController < ApplicationController
 
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
+    @picture_reviews_toshow = @coffee_shop.foursquare_reviews.where.not(picture: nil).first(4)
+    if @picture_reviews_toshow.count > 4
+      last_pics = @picture_reviews_toshow.count - 4
+      @picture_reviews_tohide = @coffee_shop.foursquare_reviews.where.not(picture: nil).last((last_pics))
+    else
+      @picture_reviews_tohide = nil
+    end
   end
 
   def search

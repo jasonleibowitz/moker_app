@@ -35,8 +35,12 @@ gem 'httparty'
 gem 'area'
 
 gem 'foundation-rails'
+gem "figaro"
 
 gem 'simplecov', :require => false, :group => :test
+
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk'
 
 group :test do
   gem 'shoulda-matchers'
@@ -46,7 +50,7 @@ end
 group :development do
   gem "binding_of_caller"
   gem 'pry-rails'
-  # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
   gem 'better_errors'
   gem 'bullet'
   gem 'quiet_assets'

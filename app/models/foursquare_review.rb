@@ -19,6 +19,9 @@ class FoursquareReview < ActiveRecord::Base
       response["response"]["venue"]["tips"]["groups"][0]["items"].each do |foursquare_tip|
         review = FoursquareReview.create
         review.comment = foursquare_tip["text"] || nil
+        unless foursquare_tip["photo"] == nil
+          review.picture = "#{foursquare_tip["photo"]["prefix"]}original#{foursquare_tip["photo"]["suffix"]}"
+        end
         review.username = "#{foursquare_tip["user"]["firstName"]} #{foursquare_tip["user"]["lastName"]}" || nil
         review.user_pic ="#{foursquare_tip["user"]["photo"]["prefix"]}original#{foursquare_tip["user"]["photo"]["suffix"]}" || nil
         review.coffee_shop_id = id
@@ -29,7 +32,7 @@ class FoursquareReview < ActiveRecord::Base
 
   def self.update_rating_based_on_foursquare_reviews
     wifi_good_list = ['free', 'great', 'fast', 'solid', 'password', 'has', 'strong']
-    wifi_bad_list = ['no', 'bad', 'slow']
+    wifi_bad_list = ['no', 'bad', 'slow', 'had']
 
     workspace_good_list = ['big']
     workspace_bad_list = ['small', 'no', 'not', 'more', 'wish', 'tight']

@@ -4,44 +4,51 @@ class CoffeeShop < ActiveRecord::Base
   has_many :reviews
   has_many :tips
 
-  FOURSQURE_EXPLORE_PREFIX = 'https://api.foursquare.com/v2/venues/explore?client_id=QAOJQNY2JJHJC2DNYHLDH0EEBPFDZAXEOA44DY1X1BZJOJOD&client_secret=4IBKRTTJCKADRNBP3GMLCOYJUF3N21G2HX1VEIE0C4E5D5PX&v=20140315&ll='
-  FOURSQURE_EXPLORE_SUFFIX = '&query=coffee&venuePhotos=1'
+  FOURSQUARE_VENUE_PREFIX = 'https://api.foursquare.com/v2/venues/'
+  FOURSQUARE_VENUE_SUFFIX = '?client_id=QAOJQNY2JJHJC2DNYHLDH0EEBPFDZAXEOA44DY1X1BZJOJOD&client_secret=4IBKRTTJCKADRNBP3GMLCOYJUF3N21G2HX1VEIE0C4E5D5PX&v=20140315'
+
+  FOURSQUARE_SEARCH_PREFIX = 'https://api.foursquare.com/v2/venues/search?client_id=QAOJQNY2JJHJC2DNYHLDH0EEBPFDZAXEOA44DY1X1BZJOJOD&client_secret=4IBKRTTJCKADRNBP3GMLCOYJUF3N21G2HX1VEIE0C4E5D5PX&v=20140315&ll='
+  FOURSQUARE_SEARCH_SUFFIX = '&limit=50&query=coffee'
 
   def self.cache_from_foursquare(zipcode)
     zip = zipcode.to_s
     lat = zip.to_lat
     lon = zip.to_lon
-    response = HTTParty.get("#{FOURSQURE_EXPLORE_PREFIX}#{lat},#{lon}#{FOURSQURE_EXPLORE_SUFFIX}")
-    response["response"]["groups"][0]["items"].each do |coffee_shop|
+    response = HTTParty.get("#{FOURSQUARE_SEARCH_PREFIX}#{lat},#{lon}#{FOURSQUARE_SEARCH_SUFFIX}")
+    response["response"]["venues"].each do |coffee_shop|
+      shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["contact"]["formattedPhone"])
+      if shop.name == nil
+        shop.foursquare_id = coffee_shop["id"]
+        shop.wifi_rating = 0
+        shop.outlet_rating = 0
+        shop.workspace_rating = 0
+        shop.total_wifi_reviews = 0
+        shop.total_wifi_upvotes = 0
+        shop.total_outlet_reviews = 0
+        shop.total_outlet_upvotes = 0
+        shop.total_workspace_reviews = 0
+        shop.total_workspace_upvotes = 0
+        shop.total_coffee_quality_reviews = 0
+        shop.total_coffee_quality_upvotes = 0
 
-      if (coffee_shop["venue"]["rating"] != nil) && (coffee_shop["venue"]["rating"] > 7.3)
-        shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["venue"]["contact"]["formattedPhone"])
-        if shop.name == nil
-          shop.rating = coffee_shop["venue"]["rating"].to_f
-          shop.coffee_rating = (coffee_shop["venue"]["rating"].to_f * 0.1)
-          shop.foursquare_rating = (coffee_shop["venue"]["rating"].to_f * 0.1)
-          shop.avatar = "#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["prefix"]}original#{coffee_shop["venue"]["photos"]["groups"][0]["items"].first["suffix"]}"
-          shop.foursquare_id = coffee_shop["venue"]["id"]
-          shop.wifi_rating = 0
-          shop.outlet_rating = 0
-          shop.workspace_rating = 0
-          shop.total_wifi_reviews = 0
-          shop.total_wifi_upvotes = 0
-          shop.total_outlet_reviews = 0
-          shop.total_outlet_upvotes = 0
-          shop.total_workspace_reviews = 0
-          shop.total_workspace_upvotes = 0
-          shop.total_coffee_quality_reviews = 0
-          shop.total_coffee_quality_upvotes = 0
-        end
-        shop.name = coffee_shop["venue"]["name"]
-        shop.address = coffee_shop["venue"]["location"]["address"]
-        shop.city = coffee_shop["venue"]["location"]["city"]
-        shop.postal_code = coffee_shop["venue"]["location"]["postalCode"]
-        shop.lat = coffee_shop["venue"]["location"]["lat"]
-        shop.lon = coffee_shop["venue"]["location"]["lng"]
-        shop.save!
+        new_shop = HTTParty.get("#{FOURSQUARE_VENUE_PREFIX}#{shop.foursquare_id}#{FOURSQUARE_VENUE_SUFFIX}")
+
+        # Rating is set on second API call
+        shop.rating = new_shop["response"]["venue"]["rating"].to_f
+        shop.coffee_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
+        shop.foursquare_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
+
+        # Picture grabbed in second API call
+        shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}"
       end
+      shop.name = coffee_shop["name"]
+      shop.address = coffee_shop["location"]["address"]
+      shop.city = coffee_shop["location"]["city"]
+      shop.postal_code = coffee_shop["location"]["postalCode"]
+      shop.lat = coffee_shop["location"]["lat"]
+      shop.lon = coffee_shop["location"]["lng"]
+      shop.url = coffee_shop["url"]
+      shop.save!
     end
   end
 
@@ -58,7 +65,8 @@ class CoffeeShop < ActiveRecord::Base
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
     sorted_array = distance_hash.sort_by {|key, value| value}
-    new_sorted_array = sorted_array.map do |shop|
+    limited_sorted_array = sorted_array.first(15)
+    new_sorted_array = limited_sorted_array.map do |shop|
         shop
     end
     return new_sorted_array.sort {|a,b| b[0].rating <=> a[0].rating}.first 10

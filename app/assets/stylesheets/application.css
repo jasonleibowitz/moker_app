@@ -24,8 +24,24 @@
   background: blue;
 }
 
+.center {
+  text-align: center;
+  display: inline-block;
+}
+
 body {
   background: RGB(215, 215, 215);
+}
+
+p.attribution {
+  color: rgba(0, 0, 0, .5);
+  font-size: 8pt;
+  line-height: 3px;
+}
+
+p.about {
+  text-align: justify;
+  margin-bottom: 35px;
 }
 
 div.avatar-wrap {
@@ -66,6 +82,41 @@ div.survey-errors-wrap{
 div.detail-wrap {
   border-radius: 10px;
   background: white;
+}
+
+p.result-address {
+  color: grey;
+  font-size: 8pt;
+  line-height: 4px;
+  margin-left: 1px;
+  padding-bottom: 10px;
+}
+
+p.show-address {
+  color: grey;
+  font-size: 8pt;
+  line-height: 4px;
+  margin-left: 3px;
+  padding-bottom: 10px;
+}
+
+div.picture-gallery {
+  text-align: center;
+  padding: 20px 0 20px 0;
+}
+
+div.show-picture-wrap {
+  /*display: inline-block;*/
+  height: 65px;
+  width: 100px;
+  overflow: hidden;
+}
+
+img.show-picture {
+  display: inline;
+  width: 200px;
+  line-height: 65px;
+  vertical-align: middle;
 }
 
 h1.title {
