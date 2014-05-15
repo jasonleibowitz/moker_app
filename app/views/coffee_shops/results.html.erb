@@ -11,6 +11,7 @@
       <hr>
     </div>
     <div class="row">
+
       <% @sorted_coffee_shops.each do |shop| %>
       <div class="small-9 columns">
         <a href="<%= coffee_shop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
@@ -27,6 +28,7 @@
       </div>
       <hr>
       <% end %>
+
     </div>
   </div>
   <div class="row"><div class="big-space"></div></div>

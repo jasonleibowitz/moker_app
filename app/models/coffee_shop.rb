@@ -56,15 +56,19 @@ class CoffeeShop < ActiveRecord::Base
     zip = user_zip.to_s
     lat1 = zip.to_lat.to_f
     long1 = zip.to_lon.to_f
-    user_city = user_zip.to_s.to_region(:city => true)
+    user_city = zip.to_region(:city => true)
     distance_hash = {}
+
     CoffeeShop.where(city: user_city).each do |shop|
       lat2 = shop.postal_code.to_lat.to_f
       long2 = shop.postal_code.to_lon.to_f
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
-    sorted_hash = distance_hash.sort_by {|key, value| value}
-    return sorted_hash.first 10
+    sorted_array = distance_hash.sort_by {|key, value| value}
+    new_sorted_array = sorted_array.map do |shop|
+        shop
+    end
+    return new_sorted_array.sort {|a,b| b[0].rating <=> a[0].rating}.first 10
   end
 
   def haversine(lat1, long1, lat2, long2)

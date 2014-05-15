@@ -16,4 +16,10 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-// $(document).foundation();
+$(document).ready(function(){
+zIndex();
+});
+
+function zIndex(){
+  $('.leaflet-top').css('zIndex', 8);
+}
