@@ -39,7 +39,7 @@ class CoffeeShop < ActiveRecord::Base
         shop.coffee_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
         shop.foursquare_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
         # Picture grabbed in second API call
-        begin:
+        begin
           shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}" || nil
         rescue NoMethodError
           shop.avatar = nil
@@ -65,8 +65,8 @@ class CoffeeShop < ActiveRecord::Base
     distance_hash = {}
 
     CoffeeShop.where(city: user_city).each do |shop|
-      lat2 = shop.postal_code.to_lat.to_f
-      long2 = shop.postal_code.to_lon.to_f
+      lat2 = shop.lat
+      long2 = shop.lon
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
     sorted_array = distance_hash.sort_by {|key, value| value}
