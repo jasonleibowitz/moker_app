@@ -49,6 +49,7 @@ class CoffeeShop < ActiveRecord::Base
       shop.lat = coffee_shop["location"]["lat"]
       shop.lon = coffee_shop["location"]["lng"]
       shop.url = coffee_shop["url"]
+      puts "#{shop.name} has been added to the database."
       shop.save!
     end
   end

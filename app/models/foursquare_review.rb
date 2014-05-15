@@ -25,6 +25,7 @@ class FoursquareReview < ActiveRecord::Base
         review.username = "#{foursquare_tip["user"]["firstName"]} #{foursquare_tip["user"]["lastName"]}" || nil
         review.user_pic ="#{foursquare_tip["user"]["photo"]["prefix"]}original#{foursquare_tip["user"]["photo"]["suffix"]}" || nil
         review.coffee_shop_id = id
+        puts "#{coffeeshop.name} updated with a review from #{review.username}"
         review.save!
       end
     end
