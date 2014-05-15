@@ -11,6 +11,18 @@
     <div class="small-8 columns">
       <h1 class="title"><%= @coffee_shop.name %></h1>
       <p class='show-address'><%= @coffee_shop.address %> | <%= @coffee_shop.phone_number %> | <a href="<%= @coffee_shop.url %>"><%= @coffee_shop.url %></a></p>
+      <% if user_signed_in? %>
+        <%= button_to 'Check In', check_in_coffee_shops_path, class: 'button tiny radius alert' %>
+      <% else %>
+      <a href="#" data-reveal-id='check-in' class="button tiny radius alert">Check In</a>
+      <% end %>
+      <div id="check-in" class="reveal-modal medium" data-reveal>
+        <div class="small-4 small-centered columns review-wrap">
+          <h3>You have to be logged in to do that!</h3>
+          <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+      </div>
     </div>
     <div class="row">
       <div class="small-4 columns">
@@ -21,9 +33,10 @@
     </div>
     <div class="small-6 columns ratings">
       <p><span title="Coffee Quality Rating"><%= image_tag 'coffee_icon.png', width: '20px' %> - <%= (@coffee_shop.coffee_rating * 10).to_i %></span> &nbsp;
-         <span title="WiFi Signal Quality Rating"><%= image_tag 'wifi_icon.png', width: '20px' %> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
-         <span title="Workspace Availability Rating"><%= image_tag 'workspace_icon.png', width: '20px' %> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
-         <span title="Power Outlet Availability Rating"><%= image_tag 'outlet_icon.png', width: '20px' %> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span></p>
+        <span title="WiFi Signal Quality Rating"><%= image_tag 'wifi_icon.png', width: '20px' %> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
+        <span title="Workspace Availability Rating"><%= image_tag 'workspace_icon.png', width: '20px' %> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
+        <span title="Power Outlet Availability Rating"><%= image_tag 'outlet_icon.png', width: '20px' %> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span> &nbsp;
+        <span title="Power Outlet Availability Rating"><%= image_tag 'users_icon.png', width: '30px' %> - <%= @coffee_shop.users.count %></span></p>
     </div>
     <div class="row">
       <div class="small-4 small-offset-1 columns rate-button">
@@ -68,7 +81,15 @@
         </ul>
       </div>
     </div>
-
+    <div class="row">
+      <div class="small-8 small-centered columns check-ins">
+      <p>Users Currently Here:</p>
+      <hr>
+        <% @coffee_shop.users.each do |checked_in_user| %>
+          <div class="check-in-avatar"><img class="check-in-avatar" src="<%= checked_in_user.image %>"></div>
+        <% end %>
+      </div>
+    </div>
     <div class="row">
       <div class="small-8 small-centered columns tips">
         <div class="small-6 columns">

@@ -153,6 +153,21 @@ p.circle-rating {
   vertical-align: middle;
 }
 
+div.check-ins {
+  margin-top: 25px;
+  background: RGB(245, 245, 245);
+  border-radius: 10px;
+  /*overflow: scroll;*/
+  /*height: 100px;*/
+  padding: 25px;
+}
+
+div.check-in-avatar {
+  width: 45px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
 div.tips {
   margin-top: 25px;
   background: RGB(245, 245, 245);
