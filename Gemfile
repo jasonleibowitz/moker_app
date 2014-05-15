@@ -35,8 +35,12 @@ gem 'httparty'
 gem 'area'
 
 gem 'foundation-rails'
+gem "figaro"
 
 gem 'simplecov', :require => false, :group => :test
+
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk'
 
 group :test do
   gem 'shoulda-matchers'
