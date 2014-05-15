@@ -20,17 +20,22 @@
     </div>
     <div class="small-6 columns ratings">
       <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= (@coffee_shop.coffee_rating * 10).to_i %></span> &nbsp;
-         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
-         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
-         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span></p>
-    </div>
-    <div class="row">
+       <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
+       <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
+       <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span></p>
+     </div>
+     <div class="row">
       <div class="small-4 small-offset-1 columns rate-button">
+        <% if user_signed_in? %>
         <a href="#" data-reveal-id='new-survey' data-reveal-ajax="<%= new_coffee_shop_reviews_path(@coffee_shop) %>" class="button tiny radius">Quick survey</a>
+        <% else %>
+        <a href="#" data-reveal-id='new-survey' class="button tiny radius">Quick survey</a>
+        <% end %>
         <div id="new-survey" class="reveal-modal" data-reveal>
-            <h3>Rate Yo' Coffee!</h3>
-            <a class="close-reveal-modal">&#215;</a>
-          </div>
+          <h3>Rate Yo' Coffee!</h3>
+          <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -76,20 +81,20 @@
         <div id="map" lon-coordinate='<%= @coffee_shop.lon %>' lat-coordinate="<%= @coffee_shop.lat %>" shop-name="<%= @coffee_shop.name %>" shop-address='<%= @coffee_shop.address %>'></div>
 
         <script>
-          var map = L.mapbox.map('map', 'jasonleibowitz.i7i19hk9')
-            .setView([<%= @coffee_shop.lat %>, <%= @coffee_shop.lon %>], 15);
+        var map = L.mapbox.map('map', 'jasonleibowitz.i7i19hk9')
+        .setView([<%= @coffee_shop.lat %>, <%= @coffee_shop.lon %>], 15);
 
-              L.mapbox.featureLayer({
+        L.mapbox.featureLayer({
               // this feature is in the GeoJSON format: see geojson.org
               // for the full specification
               type: 'Feature',
               geometry: {
-                  type: 'Point',
+                type: 'Point',
                   // coordinates here are in longitude, latitude order because
                   // x, y is the standard for GeoJSON and many formats
                   coordinates: [<%= @coffee_shop.lon %>, <%= @coffee_shop.lat %>]
-              },
-              properties: {
+                },
+                properties: {
                   title: '<%= @coffee_shop.name %>',
                   description: '<%= @coffee_shop.address %>',
                   // one can customize markers by adding simplestyle properties
@@ -97,8 +102,8 @@
                   'marker-size': 'large',
                   'marker-color': '#008CBA',
                   'marker-symbol': 'cafe'
-              }
-          }).addTo(map);
+                }
+              }).addTo(map);
         </script>
 
       </div>

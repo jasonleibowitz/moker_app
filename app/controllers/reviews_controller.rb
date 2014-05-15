@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    # if current_user
     @coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     @review = Review.new
     render :layout => "simple_layout"
