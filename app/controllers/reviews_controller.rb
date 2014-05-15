@@ -15,6 +15,7 @@ class ReviewsController < ApplicationController
   def new
     @coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     @review = Review.new
+    render :layout => "simple_layout"
   end
 
   def create

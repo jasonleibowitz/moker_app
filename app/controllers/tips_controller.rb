@@ -15,7 +15,7 @@ class TipsController < ApplicationController
   def new
     @coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
     @tip = Tip.new
-    render :layout => "layout_for_tips"
+    render :layout => "simple_layout"
   end
 
   def create
