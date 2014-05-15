@@ -33,6 +33,17 @@ body {
   background: RGB(215, 215, 215);
 }
 
+p.attribution {
+  color: rgba(0, 0, 0, .5);
+  font-size: 8pt;
+  line-height: 3px;
+}
+
+p.about {
+  text-align: justify;
+  margin-bottom: 35px;
+}
+
 div.avatar-wrap {
   border-radius: 100%;
   width: 100px;

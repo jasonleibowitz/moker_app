@@ -25,7 +25,7 @@
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
-        <% if current_user %>
+        <% if user_signed_in? %>
         <li class="active">
           <a href="#">
             <div class="nav-avatar-wrap">
@@ -42,7 +42,10 @@
         <li class="has-dropdown">
           <a href="#">Menu</a>
           <ul class="dropdown">
-            <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to 'About', about_path %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            <% end %>
           </ul>
         </li>
       </ul>
