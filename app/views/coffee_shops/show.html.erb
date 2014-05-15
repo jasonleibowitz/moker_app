@@ -10,6 +10,7 @@
   <div class="small-8 small-centered columns detail-wrap">
     <div class="small-8 columns">
       <h1 class="title"><%= @coffee_shop.name %></h1>
+      <p class='show-address'><%= @coffee_shop.address %> | <%= @coffee_shop.phone_number %> | <a href="<%= @coffee_shop.url %>"><%= @coffee_shop.url %></a></p>
     </div>
     <div class="row">
       <div class="small-4 columns">
@@ -19,10 +20,10 @@
       </div>
     </div>
     <div class="small-6 columns ratings">
-      <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= (@coffee_shop.coffee_rating * 10).to_i %></span> &nbsp;
-         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
-         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
-         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span></p>
+      <p><span title="Coffee Quality Rating"><%= image_tag 'coffee_icon.png', width: '20px' %> - <%= (@coffee_shop.coffee_rating * 10).to_i %></span> &nbsp;
+         <span title="WiFi Signal Quality Rating"><%= image_tag 'wifi_icon.png', width: '20px' %> - <%= (@coffee_shop.wifi_rating * 10).to_i %></span> &nbsp;
+         <span title="Workspace Availability Rating"><%= image_tag 'workspace_icon.png', width: '20px' %> - <%= (@coffee_shop.workspace_rating * 10).to_i %></span> &nbsp;
+         <span title="Power Outlet Availability Rating"><%= image_tag 'outlet_icon.png', width: '20px' %> - <%= (@coffee_shop.outlet_rating * 10).to_i %></span></p>
     </div>
     <div class="row">
       <div class="small-4 small-offset-1 columns rate-button">
@@ -33,6 +34,22 @@
           </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="small-10 small-offset-1 columns picture-gallery">
+        <ul class="clearing-thumbs clearing-feature center" data-clearing>
+          <% @picture_reviews_toshow.each do |review_with_picture| %>
+            <li class="clearing-featured-img"><a href="<%= review_with_picture.picture %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= review_with_picture.picture %>"></div></a></li>
+          <% end %>
+          <% unless @picture_reviews_tohide == nil %>
+            <% @picture_reviews_tohide.each do |review_with_picture| %>
+              <li><a href="<%= review_with_picture.picture %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= review_with_picture.picture %>"></div></a></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
     <div class="row">
       <div class="small-8 small-centered columns tips">
         <div class="small-6 columns">
