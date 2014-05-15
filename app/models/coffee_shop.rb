@@ -41,7 +41,7 @@ class CoffeeShop < ActiveRecord::Base
         # Picture grabbed in second API call
         begin:
           shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}" || nil
-        rescue NoMethodError:
+        rescue NoMethodError
           shop.avatar = nil
         end
       end
