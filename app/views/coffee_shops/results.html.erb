@@ -14,16 +14,16 @@
 
       <% @sorted_coffee_shops.each do |shop| %>
       <div class="small-9 columns">
-        <a href="<%= coffee_shop_path(shop) %>"><h4><%= shop.name %> (<%= shop.rating %>)</h4></a>
-        <p><%= shop.address %></p>
-        <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= (shop.coffee_rating * 10).to_i %></span> &nbsp;
-         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= (shop.wifi_rating * 10).to_i %></span> &nbsp;
-         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= (shop.workspace_rating * 10).to_i %></span> &nbsp;
-         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= (shop.outlet_rating * 10).to_i %></span></p>
+        <a href="<%= coffee_shop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
+        <p><%= shop[0].address %></p>
+        <p><span title="Coffee Quality Rating"><i class="fa fa-coffee"></i> - <%= (shop[0].coffee_rating * 10).to_i %></span> &nbsp;
+         <span title="WiFi Signal Quality Rating"><i class="fa fa-signal"></i> - <%= (shop[0].wifi_rating * 10).to_i %></span> &nbsp;
+         <span title="Workspace Availability Rating"><i class="fa fa-desktop"></i> - <%= (shop[0].workspace_rating * 10).to_i %></span> &nbsp;
+         <span title="Power Outlet Availability Rating"><i class="fa fa-power-off"> </i> - <%= (shop[0].outlet_rating * 10).to_i %></span></p>
        </div>
        <div class="small-3 columns">
         <div class="avatar-wrap">
-          <img class="result-image" src="<%= shop.avatar %>">
+          <img class="result-image" src="<%= shop[0].avatar %>">
         </div>
       </div>
       <hr>
