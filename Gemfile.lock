@@ -55,6 +55,7 @@ GEM
     bullet (4.9.0)
       activesupport
       uniform_notifier (~> 1.6.0)
+    chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -236,6 +237,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bullet
+  chronic
   coffee-rails (~> 4.0.0)
   devise
   figaro
