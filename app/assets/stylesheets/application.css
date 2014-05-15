@@ -216,6 +216,16 @@ div.nav-avatar-wrap {
   width: 170px;
 }
 
+div.tip-wrap {
+  width: 480px;
+  text-align: center;
+}
+
+div.review-wrap {
+  width: 480px;
+  text-align: center;
+}
+
 
 /*#map {
   position:absolute;
@@ -255,6 +265,5 @@ div.nav-avatar-wrap {
 div#form-tag {
   width: 200px;
 }
-
 
 
