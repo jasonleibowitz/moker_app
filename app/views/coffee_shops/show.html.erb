@@ -51,6 +51,18 @@
               <li><a href="<%= review_with_picture.picture %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= review_with_picture.picture %>"></div></a></li>
             <% end %>
           <% end %>
+          <% if @picture_reviews_toshow.count >= 4 %>
+            <% @picture_tips_to_hide.each do |tips_with_picture| %>
+              <li><a href="<%= tips_with_picture.picture.url %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= tips_with_picture.picture.url %>"></div></a></li>
+            <% end %>
+          <% else %>
+            <% @picture_tips_to_show.each do |tip_pic_to_show| %>
+              <li class="clearing-featured-img"><a href="<%= tip_pic_to_show.picture.url %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= tip_pic_to_show.picture.url %>"></div></a></li>
+            <% end %>
+            <% @picture_tips_to_hide.each do |tip_pic_to_hide| %>
+              <li><a href="<%= tip_pic_to_hide.picture.url %>"><div class="show-picture-wrap"><img class="show-picture" src="<%= tip_pic_to_hide.picture.url %>"></div></a></li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -68,7 +80,7 @@
           </div>
         </div>
         <hr>
-        <% @coffee_shop.tips.order(created_at: :desc).each do |tip| %>
+        <% @tips.each do |tip| %>
         <p class="tip-comment"><%= tip.comment %></p>
         <div class="small-2 columns">
           <div class="review-avatar-wrap"><img class="review-avatar" src="<%= tip.user.image %>"></div>

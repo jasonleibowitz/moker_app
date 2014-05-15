@@ -11,12 +11,17 @@ class CoffeeShopsController < ApplicationController
 
   def show
     @coffee_shop = CoffeeShop.find(params[:id])
+    @tips = @coffee_shop.tips.order(created_at: :desc).includes(:user)
     @picture_reviews_toshow = @coffee_shop.foursquare_reviews.where.not(picture: nil).first(4)
-    if @picture_reviews_toshow.count > 4
+    if @picture_reviews_toshow.count >= 4
       last_pics = @picture_reviews_toshow.count - 4
       @picture_reviews_tohide = @coffee_shop.foursquare_reviews.where.not(picture: nil).last((last_pics))
+      @picture_tips_to_show = nil
+      @picture_tips_to_hide = @coffee_shop.tips.where.not(picture_file_name: nil)
     else
       @picture_reviews_tohide = nil
+      @picture_tips_to_show = @coffee_shop.tips.where.not(picture_file_name: nil).first(4 - @picture_reviews_toshow.count)
+      @picture_tips_to_hide = @coffee_shop.tips.where.not(picture_file_name: nil).last(@coffee_shop.tips.where.not(picture_file_name: nil).count - @picture_tips_to_show.count)
     end
   end
 
