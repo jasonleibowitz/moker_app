@@ -2,6 +2,11 @@ class CoffeeShopsController < ApplicationController
 
   def index
     @coffee_shops = CoffeeShop.all
+    if request.env["HTTP_REFERER"] == 'http://localhost:3000/'
+    elsif request.env["HTTP_REFERER"] == nil
+    else
+      redirect_to :back
+    end
   end
 
   def show
