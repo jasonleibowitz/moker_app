@@ -30,11 +30,13 @@
         <% if user_signed_in? %>
         <a href="#" data-reveal-id='new-survey' data-reveal-ajax="<%= new_coffee_shop_reviews_path(@coffee_shop) %>" class="button tiny radius">Quick survey</a>
         <% else %>
-        <a href="#" data-reveal-id='new-survey' class="button tiny radius">Quick survey</a>
+        <a href="#" data-reveal-id='new-survey' class="button tiny radius">Review</a>
         <% end %>
-        <div id="new-survey" class="reveal-modal" data-reveal>
-          <h3>Rate Yo' Coffee!</h3>
-          <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+        <div id="new-survey" class="reveal-modal medium" data-reveal>
+          <div class="small-4 small-centered columns review-wrap">
+            <h3>Log in to review!</h3>
+            <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+          </div>
           <a class="close-reveal-modal">&#215;</a>
         </div>
       </div>
@@ -73,9 +75,16 @@
           <h6 class="tip-title">Tips:</h6>
         </div>
         <div class="small-4 small-offset-2 columns tip-button">
+          <% if user_signed_in? %>
           <a href="#" data-reveal-id='new-tip' data-reveal-ajax="<%= new_coffee_shop_tip_path(@coffee_shop) %>" class="button tiny radius">Leave a Tip</a>
+          <% else %>
+          <a href="#" data-reveal-id='new-tip' class="button tiny radius">Leave a Tip</a>
+          <% end %>
           <div id="new-tip" class="reveal-modal medium" data-reveal>
-            <h3>Leave a Tip!</h3>
+            <div class="small-4 small-centered columns tip-wrap">
+            <h3>Sign in to leave a tip!</h3>
+            <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag "facebooksignin.png", class: "fbook-signin" %></a>
+            </div>
             <a class="close-reveal-modal">&#215;</a>
           </div>
         </div>
