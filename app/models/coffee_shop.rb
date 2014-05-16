@@ -12,44 +12,60 @@ class CoffeeShop < ActiveRecord::Base
   FOURSQUARE_SEARCH_SUFFIX = '&limit=50&query=coffee'
 
   def self.cache_from_foursquare(zipcode)
+    new = false
     zip = zipcode.to_s
     lat = zip.to_lat
     lon = zip.to_lon
+    puts "==============================="
+    puts "grabbing for zipcode #{zipcode}"
+    puts "==============================="
     response = HTTParty.get("#{FOURSQUARE_SEARCH_PREFIX}#{lat},#{lon}#{FOURSQUARE_SEARCH_SUFFIX}")
-    response["response"]["venues"].each do |coffee_shop|
-      shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["contact"]["formattedPhone"])
-      if shop.name == nil
-        shop.foursquare_id = coffee_shop["id"]
-        shop.wifi_rating = 0
-        shop.outlet_rating = 0
-        shop.workspace_rating = 0
-        shop.total_wifi_reviews = 0
-        shop.total_wifi_upvotes = 0
-        shop.total_outlet_reviews = 0
-        shop.total_outlet_upvotes = 0
-        shop.total_workspace_reviews = 0
-        shop.total_workspace_upvotes = 0
-        shop.total_coffee_quality_reviews = 0
-        shop.total_coffee_quality_upvotes = 0
+    begin
+      response["response"]["venues"].each do |coffee_shop|
+        shop = CoffeeShop.find_or_create_by(foursquare_id: coffee_shop["id"])
+        if shop.name == nil
+          new = true
+          shop.foursquare_id = coffee_shop["id"]
+          shop.wifi_rating = 0
+          shop.outlet_rating = 0
+          shop.workspace_rating = 0
+          shop.total_wifi_reviews = 0
+          shop.total_wifi_upvotes = 0
+          shop.total_outlet_reviews = 0
+          shop.total_outlet_upvotes = 0
+          shop.total_workspace_reviews = 0
+          shop.total_workspace_upvotes = 0
+          shop.total_coffee_quality_reviews = 0
+          shop.total_coffee_quality_upvotes = 0
 
-        new_shop = HTTParty.get("#{FOURSQUARE_VENUE_PREFIX}#{shop.foursquare_id}#{FOURSQUARE_VENUE_SUFFIX}")
+          new_shop = HTTParty.get("#{FOURSQUARE_VENUE_PREFIX}#{shop.foursquare_id}#{FOURSQUARE_VENUE_SUFFIX}")
 
-        # Rating is set on second API call
-        shop.rating = new_shop["response"]["venue"]["rating"].to_f
-        shop.coffee_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
-        shop.foursquare_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
-
-        # Picture grabbed in second API call
-        shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}"
+          # Rating is set on second API call
+          shop.rating = new_shop["response"]["venue"]["rating"].to_f
+          shop.coffee_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
+          shop.foursquare_rating = (new_shop["response"]["venue"]["rating"].to_f * 0.1)
+          # Picture grabbed in second API call
+          begin
+            shop.avatar = "#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["prefix"]}original#{new_shop["response"]["venue"]["photos"]["groups"][0]["items"][0]["suffix"]}" || nil
+          rescue NoMethodError
+            shop.avatar = nil
+          end
+        end
+        shop.name = coffee_shop["name"]
+        shop.address = coffee_shop["location"]["address"]
+        shop.city = coffee_shop["location"]["city"]
+        shop.postal_code = coffee_shop["location"]["postalCode"]
+        shop.lat = coffee_shop["location"]["lat"]
+        shop.lon = coffee_shop["location"]["lng"]
+        shop.url = coffee_shop["url"]
+        if new == true
+          puts "#{shop.name} has been added to the database."
+        else
+          puts "#{shop.name} has been updated in the database."
+        end
+        shop.save!
       end
-      shop.name = coffee_shop["name"]
-      shop.address = coffee_shop["location"]["address"]
-      shop.city = coffee_shop["location"]["city"]
-      shop.postal_code = coffee_shop["location"]["postalCode"]
-      shop.lat = coffee_shop["location"]["lat"]
-      shop.lon = coffee_shop["location"]["lng"]
-      shop.url = coffee_shop["url"]
-      shop.save!
+    rescue NoMethodError
     end
   end
 
@@ -61,8 +77,8 @@ class CoffeeShop < ActiveRecord::Base
     distance_hash = {}
 
     CoffeeShop.where(city: user_city).each do |shop|
-      lat2 = shop.postal_code.to_lat.to_f
-      long2 = shop.postal_code.to_lon.to_f
+      lat2 = shop.lat
+      long2 = shop.lon
       distance_hash[shop] = shop.haversine(lat1, long1, lat2, long2)
     end
     sorted_array = distance_hash.sort_by {|key, value| value}
