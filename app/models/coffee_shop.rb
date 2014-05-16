@@ -16,7 +16,9 @@ class CoffeeShop < ActiveRecord::Base
     zip = zipcode.to_s
     lat = zip.to_lat
     lon = zip.to_lon
+    puts "==============================="
     puts "grabbing for zipcode #{zipcode}"
+    puts "==============================="
     response = HTTParty.get("#{FOURSQUARE_SEARCH_PREFIX}#{lat},#{lon}#{FOURSQUARE_SEARCH_SUFFIX}")
     begin
       response["response"]["venues"].each do |coffee_shop|
