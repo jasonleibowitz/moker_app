@@ -43,7 +43,7 @@ The possibilities are limitless.
 	* RSpec
 	* Shoulda Matchers
 	* Simple Cov
-		* Testing Coverage: 91.72%
+		* Testing Coverage: 90.3%
 
 
 ### ERD
