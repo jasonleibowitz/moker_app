@@ -12,6 +12,7 @@ class CoffeeShop < ActiveRecord::Base
   FOURSQUARE_SEARCH_SUFFIX = '&limit=50&query=coffee'
 
   def self.cache_from_foursquare(zipcode)
+    new = false
     zip = zipcode.to_s
     lat = zip.to_lat
     lon = zip.to_lon
@@ -19,8 +20,9 @@ class CoffeeShop < ActiveRecord::Base
     response = HTTParty.get("#{FOURSQUARE_SEARCH_PREFIX}#{lat},#{lon}#{FOURSQUARE_SEARCH_SUFFIX}")
     begin
       response["response"]["venues"].each do |coffee_shop|
-        shop = CoffeeShop.find_or_create_by(phone_number: coffee_shop["contact"]["formattedPhone"])
+        shop = CoffeeShop.find_or_create_by(foursquare_id: coffee_shop["id"])
         if shop.name == nil
+          new = true
           shop.foursquare_id = coffee_shop["id"]
           shop.wifi_rating = 0
           shop.outlet_rating = 0
@@ -54,7 +56,11 @@ class CoffeeShop < ActiveRecord::Base
         shop.lat = coffee_shop["location"]["lat"]
         shop.lon = coffee_shop["location"]["lng"]
         shop.url = coffee_shop["url"]
-        puts "#{shop.name} has been added to the database."
+        if new == true
+          puts "#{shop.name} has been added to the database."
+        else
+          puts "#{shop.name} has been updated in the database."
+        end
         shop.save!
       end
     rescue NoMethodError
