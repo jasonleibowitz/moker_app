@@ -159,9 +159,11 @@ div.check-ins {
 }
 
 div.check-in-avatar {
+  display: inline-block;
   width: 45px;
   overflow: hidden;
   border-radius: 100%;
+  margin-right: 10px;
 }
 
 div.tips {
