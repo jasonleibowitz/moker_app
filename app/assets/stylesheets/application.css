@@ -29,8 +29,25 @@
   display: inline-block;
 }
 
+.white-text {
+  color: white;
+}
+
+.grey-background {
+  background: rgb(215, 215, 215);
+  background: RGBA(215, 215, 215, .6);
+  padding: 20px;
+}
+
 body {
-  background: RGB(215, 215, 215);
+  /*background: RGB(215, 215, 215);*/
+  background: url(background_greyscale.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+p {
+  color: white;
 }
 
 p.attribution {
