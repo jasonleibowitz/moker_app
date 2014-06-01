@@ -34,9 +34,10 @@
 }
 
 .grey-background {
-  background: rgb(215, 215, 215);
-  background: RGBA(215, 215, 215, .6);
+  background-color: rgb(215, 215, 215);
+  background-color: RGBA(215, 215, 215, .8);
   padding: 20px;
+  border-radius: 10px;
 }
 
 body {
@@ -46,9 +47,7 @@ body {
   background-repeat: no-repeat;
 }
 
-p {
-  color: white;
-}
+
 
 p.attribution {
   color: rgba(0, 0, 0, .5);
