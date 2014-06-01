@@ -16,6 +16,7 @@
 
  */
 
+
 .red {
   background: red;
 }
@@ -42,9 +43,11 @@
 
 body {
   /*background: RGB(215, 215, 215);*/
-  background: url(background_greyscale.jpg);
+  background: url(background_greyscale.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 
