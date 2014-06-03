@@ -19,7 +19,11 @@ $(function(){ $(document).foundation(); });
 $(document).ready(function(){
   zIndex();
   // Instatiate MixItUp
-  $('.detail-wrap').mixItUp();
+  $('.detail-wrap').mixItUp({
+    layout: {
+      display: 'block'
+    }
+  });
 });
 
 function zIndex(){
