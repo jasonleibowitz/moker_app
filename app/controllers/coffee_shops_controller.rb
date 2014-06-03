@@ -2,7 +2,7 @@ class CoffeeShopsController < ApplicationController
 
   def index
     @coffee_shops = CoffeeShop.all
-    if request.env["HTTP_REFERER"] == 'http://enigmatic-dusk-1554.herokuapp.com/'
+    if request.env["HTTP_REFERER"] == 'http://moker.herokuapp.com/'
     elsif request.env["HTTP_REFERER"] == nil
     else
       redirect_to :back
