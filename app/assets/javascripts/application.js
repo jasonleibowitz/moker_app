@@ -17,7 +17,13 @@
 
 $(function(){ $(document).foundation(); });
 $(document).ready(function(){
-zIndex();
+  zIndex();
+  // Instatiate MixItUp
+  $('.detail-wrap').mixItUp({
+    layout: {
+      display: 'block'
+    }
+  });
 });
 
 function zIndex(){

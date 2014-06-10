@@ -1,5 +1,9 @@
 <div class="row">
   <div class="big-space"></div>
+  <div class="small-8 small-centered columns">
+    <button class="button sort" data-sort="distance:asc">Sort by Distance</button>
+    <button class="button sort" data-sort="rating:desc">Sort by Rating</button>
+  </div>
 </div>
 
 <div class="row">
@@ -13,21 +17,23 @@
     <div class="row">
 
       <% @sorted_coffee_shops.each do |shop| %>
-      <div class="small-9 columns">
-        <a href="<%= coffee_shop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
-        <p class="result-address"><%= shop[0].address %> | <%= '%.2f' % shop[1] %> miles from you </p>
-        <p><span title="Coffee Quality Rating"><%= image_tag 'coffee_icon.png', width: '20px' %> - <%= (shop[0].coffee_rating * 10).to_i %></span> &nbsp;
-         <span title="WiFi Signal Quality Rating"><%= image_tag 'wifi_icon.png', width: '20px' %> - <%= (shop[0].wifi_rating * 10).to_i %></span> &nbsp;
-         <span title="Workspace Availability Rating"><%= image_tag 'workspace_icon.png', width: '20px' %> - <%= (shop[0].workspace_rating * 10).to_i %></span> &nbsp;
-         <span title="Power Outlet Availability Rating"><%= image_tag 'outlet_icon.png', width: '20px' %> - <%= (shop[0].outlet_rating * 10).to_i %></span> &nbsp;
-        <span title="Power Outlet Availability Rating"><%= image_tag 'users_icon.png', width: '30px' %> - <%= shop[0].users.count %></span></p>
-       </div>
-       <div class="small-3 columns">
-        <div class="avatar-wrap">
-          <img class="result-image" src="<%= shop[0].avatar %>">
+      <div class="mix" data-distance="<%= shop[1] %>" data-rating="<%= shop[0].rating %>">
+        <div class="small-9 columns">
+          <a href="<%= coffee_shop_path(shop[0]) %>"><h4><%= shop[0].name %> (<%= shop[0].rating %>)</h4></a>
+          <p class="result-address"><%= shop[0].address %> | <%= '%.2f' % shop[1] %> miles from you </p>
+          <p><span title="Coffee Quality Rating"><%= image_tag 'coffee_icon.png', width: '20px' %> - <%= (shop[0].coffee_rating * 10).to_i %></span> &nbsp;
+           <span title="WiFi Signal Quality Rating"><%= image_tag 'wifi_icon.png', width: '20px' %> - <%= (shop[0].wifi_rating * 10).to_i %></span> &nbsp;
+           <span title="Workspace Availability Rating"><%= image_tag 'workspace_icon.png', width: '20px' %> - <%= (shop[0].workspace_rating * 10).to_i %></span> &nbsp;
+           <span title="Power Outlet Availability Rating"><%= image_tag 'outlet_icon.png', width: '20px' %> - <%= (shop[0].outlet_rating * 10).to_i %></span> &nbsp;
+          <span title="Power Outlet Availability Rating"><%= image_tag 'users_icon.png', width: '30px' %> - <%= shop[0].users.count %></span></p>
+         </div>
+         <div class="small-3 columns">
+          <div class="avatar-wrap">
+            <img class="result-image" src="<%= shop[0].avatar %>">
+          </div>
         </div>
-      </div>
       <hr>
+      </div>
       <% end %>
 
     </div>

@@ -16,6 +16,7 @@
 
  */
 
+
 .red {
   background: red;
 }
@@ -29,9 +30,35 @@
   display: inline-block;
 }
 
-body {
-  background: RGB(215, 215, 215);
+.white-text {
+  color: white;
 }
+
+.white-background {
+  background-color: rgba(255, 255, 255, .7);
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.grey-background {
+  background-color: rgb(215, 215, 215);
+  background-color: RGBA(215, 215, 215, .8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+body {
+  /*background: RGB(215, 215, 215);*/
+  background: url(background_greyscale.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 
 p.attribution {
   color: rgba(0, 0, 0, .5);
