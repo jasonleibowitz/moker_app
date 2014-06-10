@@ -4,6 +4,8 @@ class CoffeeShopsController < ApplicationController
     @coffee_shops = CoffeeShop.all
     if request.env["HTTP_REFERER"] == 'http://moker.herokuapp.com/'
     elsif request.env["HTTP_REFERER"] == nil
+    elsif request.env["HTTP_REFERER"] == 'http://jasonleibowitz.org/'
+    elsif request.env["HTTP_REFERER"] == 'http://yuzo.co/'
     else
       redirect_to :back
     end
